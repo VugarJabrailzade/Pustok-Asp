@@ -1,0 +1,33 @@
+﻿@model ProductSizeAddViewModel
+@{
+    Layout = "_AdminLayout";
+}
+
+@section custom_plugings{
+    <link href="~/admin/assets/plugins/select/selectr.min.css" rel="stylesheet" type="text/css" />
+}
+
+
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <p class="text-muted mb-0">Add New Product.</p>
+        </div><!--end card-header-->
+        <div class="card-body">
+            <form asp-route="add-size" method="POST">
+                <div class="form-group">
+                    <label asp-for="SelectedSizesIds">Product Size:</label>
+                    <input asp-for="SelectedSizesIds" type="text" class="form-control" id="productSize" placeholder="Enter size name">
+                    <span asp-validation-for="Sizes" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Product</button>
+            </form>
+        </div><!--end card-body-->
+    </div><!--end card-->
+</div>
+
+@section custom_plugin_scripts{
+    <script src="~/admin/assets/plugins/select/selectr.min.js"></script>
+}
+
+
