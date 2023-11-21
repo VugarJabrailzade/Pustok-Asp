@@ -1,4 +1,6 @@
 ﻿using FluentValidation;
+using FluentValidation.Results;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -16,12 +18,16 @@ namespace Pustok.Controllers.Admin
     {
         public readonly PustokDbContext _pustokDbContext;
         public readonly ILogger<CategoryController> _logger;
-        public IValidator<Category> _validator;
+        public readonly IValidator<CategoryAddResponseViewModel> _validator;
 
 
-        public CategoryController(PustokDbContext pustokDbContext, ILogger<CategoryController> logger)
+
+        public CategoryController(PustokDbContext pustokDbContext, 
+                                  ILogger<CategoryController> logger,
+                                  IValidator<CategoryAddResponseViewModel> validator)
         {
             _logger = logger;
+            _validator = validator;
             _pustokDbContext = pustokDbContext;
 
         }
@@ -50,7 +56,27 @@ namespace Pustok.Controllers.Admin
 
         public async Task<IActionResult> Add(CategoryAddResponseViewModel model)
         {
+            ValidationResult result = await _validator.ValidateAsync(model);
+
+
+            if (!result.IsValid)
+            {
+                // If validation fails, add errors to ModelState and return BadRequest
+                foreach (var failure in result.Errors)
+                {
+                    ModelState.AddModelError(failure.PropertyName, failure.ErrorMessage);
+                }
+
+                return BadRequest(ModelState);
+            }
+
             if (!ModelState.IsValid) return BadRequest();
+
+            if(model == null)
+            {
+                ModelState.AddModelError("Name", "Can't be null");
+                return BadRequest(ModelState);
+            }
 
 
             var existCate = _pustokDbContext.Categories.FirstOrDefault(c=> c.Name == model.Name);
@@ -72,7 +98,7 @@ namespace Pustok.Controllers.Admin
         }
 
 
-        [HttpDelete("delete/{id}", Name = "category-delete")]
+        [HttpDelete("delete", Name = "category-delete")]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -85,15 +111,22 @@ namespace Pustok.Controllers.Admin
                 }
 
                 _pustokDbContext.Remove(category);
-
                 await _pustokDbContext.SaveChangesAsync();
 
-                return RedirectToAction("category-list");
+                var response = new
+                {
+                    deleteid = id,
+                    deleteName = category.Name,
+                };
+
+                return Json(response);
             }
             catch (Exception)
             {
                 return StatusCode(202);
             }
+
+            
         }
     }
 }

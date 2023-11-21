@@ -31,7 +31,7 @@
                 </p>
             </div>
             <a class="btn btn-primary addCate" asp-route="category-add" data-toggle="modal" data-target="#exampleModalCenter">
-                Launch demo modal
+                Add New Category
             </a>
         </div><!--end card-header-->
         <div class="card-body">
@@ -52,7 +52,7 @@
                                     <a >
                                     <i class="las la-pen text-secondary font-16"></i>
                                 </a>
-                                    <a asp-route="category-delete" asp-route-Id="@category.Id">
+                                    <a class="deleteCate" asp-route="category-delete" asp-route-Id="@category.Id">
                                     <i class="las la-trash-alt text-secondary font-16"></i>
                                 </a>
                                 </td>

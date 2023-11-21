@@ -33,7 +33,7 @@ public class Program
 
         builder.Services
             .AddScoped<IEmployeeService, EmployeeServiceImp>()
-            .AddScoped<IValidator<Category>,CategoryValidator>()
+            .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Program>())
             .AddDbContext<PustokDbContext>(o =>
             {
                 o.UseNpgsql(DatabaseConstants.CONNECTION_STRING);

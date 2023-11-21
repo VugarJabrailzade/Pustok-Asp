@@ -1,9 +1,10 @@
 ﻿using FluentValidation;
 using Pustok.Database.DomainModels;
+using Pustok.ViewModels.Product;
 
 namespace Pustok.Validation
 {
-    public class CategoryValidator : AbstractValidator<Category>
+    public class CategoryValidator : AbstractValidator<CategoryAddResponseViewModel>
     {
         public CategoryValidator()
         {
