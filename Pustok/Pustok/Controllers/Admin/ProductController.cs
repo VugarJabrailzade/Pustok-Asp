@@ -5,6 +5,7 @@ using Npgsql;
 using Pustok.Database;
 using Pustok.Database.DomainModels;
 using Pustok.ViewModels.Product;
+using System.IO;
 using System.Linq;
 
 namespace Pustok.Controllers.Admin;
@@ -59,6 +60,9 @@ public class ProductController : Controller
     [HttpPost("add")]
     public IActionResult Add(ProductAddRequestViewModel model)
     {
+        if (model.Image == null) return BadRequest();
+
+
         if (!ModelState.IsValid)
             return PrepareValidationView("Views/Admin/Product/ProductAdd.cshtml");
 
@@ -81,10 +85,12 @@ public class ProductController : Controller
                 Price = model.Price,
                 Rating = model.Rating,
                 CategoryId = model.CategoryId,
+                
             };
 
             _pustokDbContext.Products.Add(product);
 
+            #region Color
 
             foreach (var colorId in model.SelectedColorIds)
             {
@@ -106,7 +112,11 @@ public class ProductController : Controller
                 _pustokDbContext.ProductColors.Add(productColor);
             }
 
-            foreach(var sizeId in model.SelectedSizesIds)
+            #endregion
+
+            #region Size
+
+            foreach (var sizeId in model.SelectedSizesIds)
             {
                 var size = _pustokDbContext.Sizes.FirstOrDefault(x=> x.Id == sizeId);
                 if(size == null)
@@ -124,6 +134,17 @@ public class ProductController : Controller
 
                 _pustokDbContext.ProductSizes.Add(productSize);
             }
+
+            #endregion
+
+
+
+            string absolutePath = $"C:\\Users\\vcebr\\OneDrive\\Desktop\\Pustok\\Pustok\\Pustok\\wwwroot\\images\\{model.Image.FileName}";
+
+             using FileStream fileStream = new FileStream(absolutePath, FileMode.Create);
+             model.Image.CopyTo(fileStream); //Copyto ramdan birbahsa sisteme yazir) file stream ile fayli ramdan oturub diskde saxlamag; temin edirik
+
+            product.ImagePath = model.Image.FileName;
 
             _pustokDbContext.SaveChanges();
 

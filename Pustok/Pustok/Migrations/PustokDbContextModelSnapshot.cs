@@ -173,6 +173,9 @@ namespace Pustok.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("categoryid");
 
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("text");
+
                     b.Property<string>("Name")
                         .HasColumnType("text")
                         .HasColumnName("name");

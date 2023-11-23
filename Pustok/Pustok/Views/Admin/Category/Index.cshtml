@@ -49,10 +49,11 @@
                             <tr>
                                 <td>@category.Name</td>
                                 <td class="text-end">
-                                    <a >
+                                    <input readonly hidden value="@category.Id"/>
+                                    <a class="updateCate" data-toggle="modal" data-target="#exampleModalCenter" asp-route="category-update">
                                     <i class="las la-pen text-secondary font-16"></i>
                                 </a>
-                                    <a class="deleteCate" asp-route="category-delete" asp-route-Id="@category.Id">
+                                <a class="deleteCate" asp-route="category-delete" asp-route-Id="@category.Id">
                                     <i class="las la-trash-alt text-secondary font-16"></i>
                                 </a>
                                 </td>
@@ -64,18 +65,3 @@
         </div><!--end card-body-->
     </div><!--end card-->
 </div> <!-- end col -->
-
-@section custom_scripts{
-    <script>
-        $('#modal-wrap').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget) // Button that triggered the modal
-            var recipient = button.data('whatever') // Extract info from data-* attributes
-            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-            var modal = $(this)
-            modal.find('.modal-title').text('New message to ' + recipient)
-            modal.find('.modal-body input').val(recipient)
-        })
-
-    </script>
-}

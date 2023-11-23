@@ -9,6 +9,7 @@ using FluentValidation;
 using Pustok.Database.DomainModels;
 using FluentValidation.AspNetCore;
 using Pustok.Validation;
+using Pustok.ViewModels.Product;
 
 namespace Pustok;
 
@@ -31,13 +32,13 @@ public class Program
 
 
 
-        builder.Services
-            .AddScoped<IEmployeeService, EmployeeServiceImp>()
-            .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Program>())
-            .AddDbContext<PustokDbContext>(o =>
-            {
-                o.UseNpgsql(DatabaseConstants.CONNECTION_STRING);
-            });
+            builder.Services
+                .AddScoped<IEmployeeService, EmployeeServiceImp>()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CategoryAddResponseViewModel>())
+                .AddDbContext<PustokDbContext>(o =>
+                {
+                    o.UseNpgsql(DatabaseConstants.CONNECTION_STRING);
+                });
 
 
         //Middleware pipeline

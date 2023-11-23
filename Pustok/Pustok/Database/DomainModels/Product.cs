@@ -35,6 +35,8 @@ public class Product : IEntity
 
     [Column("categoryid")]
     public int? CategoryId { get; set; }
+
+    public string ImagePath { get; set; } 
     public Category Category { get; set; }
 
     public List<ProductColor> ProductColors { get; set; }

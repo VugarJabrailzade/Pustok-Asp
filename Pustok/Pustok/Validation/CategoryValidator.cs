@@ -8,9 +8,9 @@ namespace Pustok.Validation
     {
         public CategoryValidator()
         {
-            RuleFor(n => n.Name).NotEmpty()
-                .WithMessage("Please enter category Name")
-                .Length(3, 15);
+            RuleFor(n => n.Name).NotNull()
+                .When(x => x.Name == null).WithMessage("Please enter category Name")
+                .Length(3, 15).WithMessage("Name can't be less than 3 character");
             
         }
     }

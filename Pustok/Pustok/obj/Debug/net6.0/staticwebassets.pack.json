@@ -4481,6 +4481,10 @@
       "PackagePath": "staticwebassets\\client\\assets\\scss\\style.scss"
     },
     {
+      "Id": "C:\\Users\\vcebr\\OneDrive\\Desktop\\Pustok\\Pustok\\Pustok\\wwwroot\\images\\product\\nissan-gtr.jpg",
+      "PackagePath": "staticwebassets\\images\\product\\nissan-gtr.jpg"
+    },
+    {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.Pustok.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

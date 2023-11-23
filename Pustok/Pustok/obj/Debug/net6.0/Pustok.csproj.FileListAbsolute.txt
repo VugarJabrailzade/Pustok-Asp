@@ -363,3 +363,4 @@ C:\Users\vcebr\OneDrive\Desktop\Pustok\Pustok\Pustok\obj\Debug\net6.0\ref\Pustok
 C:\Users\vcebr\OneDrive\Desktop\Pustok\Pustok\Pustok\bin\Debug\net6.0\FluentValidation.dll
 C:\Users\vcebr\OneDrive\Desktop\Pustok\Pustok\Pustok\bin\Debug\net6.0\FluentValidation.AspNetCore.dll
 C:\Users\vcebr\OneDrive\Desktop\Pustok\Pustok\Pustok\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Users\vcebr\OneDrive\Desktop\Pustok\Pustok\Pustok\obj\Debug\net6.0\Pustok.sourcelink.json
