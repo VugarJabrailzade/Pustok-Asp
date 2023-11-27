@@ -1,12 +1,12 @@
 ﻿@model CategoryAddRequestViewModel
 
 
-<form>
-    <a asp-route="category-update-post"></a>
+<form method="POST">
+    <a asp-route="category-update-post" asp-route-id="@Model.Id"></a>
     <div class="form-group">
         <label asp-for="Name">Category:</label>
         <input asp-for="Name" type="text" class="form-control" id="productSize">
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
-    <button type="submit" class="btn btn-primary updCateBtn">Update Category</button>
+    <button  type="submit" class="btn btn-primary updCateBtn">Update Category</button>
 </form>

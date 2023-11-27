@@ -37,6 +37,7 @@ public class Product : IEntity
     public int? CategoryId { get; set; }
 
     public string ImagePath { get; set; } 
+    public string ImageNameInFileSystem { get; set; }
     public Category Category { get; set; }
 
     public List<ProductColor> ProductColors { get; set; }

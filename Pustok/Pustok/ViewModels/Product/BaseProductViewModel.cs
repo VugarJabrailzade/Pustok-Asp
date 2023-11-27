@@ -26,4 +26,6 @@ public abstract class BaseProductViewModel
     public List<Size> Sizes { get; set; }
 
     public IFormFile Image { get; set; }
+
+    public string ImageNameInFileSystem { get; set; }
 }

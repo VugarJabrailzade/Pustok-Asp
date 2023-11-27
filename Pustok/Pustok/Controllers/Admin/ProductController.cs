@@ -2,8 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Npgsql;
+using Pustok.Contracts;
 using Pustok.Database;
 using Pustok.Database.DomainModels;
+using Pustok.Services.Abstract;
 using Pustok.ViewModels.Product;
 using System.IO;
 using System.Linq;
@@ -15,13 +17,16 @@ public class ProductController : Controller
 {
     private readonly PustokDbContext _pustokDbContext;
     private readonly ILogger<ProductController> _logger;
+    private readonly IFileService _fileService;
 
     public ProductController(
         PustokDbContext pustokDbContext,
-        ILogger<ProductController> logger)
+        ILogger<ProductController> logger,
+        IFileService fileService)
     {
         _pustokDbContext = pustokDbContext;
         _logger = logger;
+        _fileService = fileService;
     }
 
     #region Products
@@ -138,13 +143,10 @@ public class ProductController : Controller
             #endregion
 
 
-
-            string absolutePath = $"C:\\Users\\vcebr\\OneDrive\\Desktop\\Pustok\\Pustok\\Pustok\\wwwroot\\images\\{model.Image.FileName}";
-
-             using FileStream fileStream = new FileStream(absolutePath, FileMode.Create);
-             model.Image.CopyTo(fileStream); //Copyto ramdan birbahsa sisteme yazir) file stream ile fayli ramdan oturub diskde saxlamag; temin edirik
+            string uniqueFileName = _fileService.Upload(model.Image, UploadDirectory.Products);
 
             product.ImagePath = model.Image.FileName;
+            product.ImageNameInFileSystem = uniqueFileName;
 
             _pustokDbContext.SaveChanges();
 
@@ -185,7 +187,8 @@ public class ProductController : Controller
             SelectedColorIds = product.ProductColors.Select(pc => pc.ColorId).ToArray(),
             SelectedSizesIds = product.ProductSizes.Select(ps => ps.SizeId).ToArray(),
             Colors = _pustokDbContext.Colors.ToList(),
-            Sizes = _pustokDbContext.Sizes.ToList()
+            Sizes = _pustokDbContext.Sizes.ToList(),
+            ImageNameInFileSystem = product.ImageNameInFileSystem
         };
 
         return View("Views/Admin/Product/ProductEdit.cshtml", model);
@@ -257,6 +260,20 @@ public class ProductController : Controller
 
         product.ProductSizes.AddRange(newProductSize);
 
+
+
+        if(model.Image!= null)
+        {
+            _fileService.Delete(UploadDirectory.Products, product.ImageNameInFileSystem);
+
+            product.ImagePath = model.Image.FileName;
+
+            product.ImageNameInFileSystem = _fileService.Upload(model.Image, UploadDirectory.Products);
+
+
+        }
+
+
         try
         {
             product.Name = model.Name;
@@ -291,8 +308,11 @@ public class ProductController : Controller
             return NotFound();
         }
 
+
         _pustokDbContext.Remove(product);
         _pustokDbContext.SaveChanges();
+
+        _fileService.Delete(UploadDirectory.Products,product.ImageNameInFileSystem);
 
 
         return RedirectToAction("Products");

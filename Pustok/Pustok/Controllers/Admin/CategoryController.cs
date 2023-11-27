@@ -111,16 +111,20 @@ namespace Pustok.Controllers.Admin
 
         #endregion
 
-        [HttpPut("update-post", Name ="category-update-post")]
-        public async Task<IActionResult> Update(CategoryAddRequestViewModel model)
+        [HttpPost("update-post/{id}", Name ="category-update-post")]
+        public async Task<IActionResult> Update([FromRoute] int id, CategoryAddRequestViewModel model)
         {
-            var category = await _pustokDbContext.Categories.FirstOrDefaultAsync(x => x.Id == model.Id);
 
-            if(category == null) return BadRequest("Not Working!");
 
-            var newUptCate = new Category { Name = model.Name };
+            if (!ModelState.IsValid) { return BadRequest(); }
 
-            _pustokDbContext.Categories.Add(newUptCate);
+            var newCategory = new Category
+            {
+                Id = model.Id,
+                Name = model.Name
+            };
+
+            _pustokDbContext.Categories.Update(newCategory);
             await _pustokDbContext.SaveChangesAsync();
 
 

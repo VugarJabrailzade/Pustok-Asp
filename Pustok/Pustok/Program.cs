@@ -10,6 +10,7 @@ using Pustok.Database.DomainModels;
 using FluentValidation.AspNetCore;
 using Pustok.Validation;
 using Pustok.ViewModels.Product;
+using Pustok.Services.Concretes;
 
 namespace Pustok;
 
@@ -34,6 +35,7 @@ public class Program
 
             builder.Services
                 .AddScoped<IEmployeeService, EmployeeServiceImp>()
+                .AddScoped<IFileService, FileService>()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CategoryAddResponseViewModel>())
                 .AddDbContext<PustokDbContext>(o =>
                 {

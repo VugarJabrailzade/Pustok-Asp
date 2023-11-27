@@ -51,7 +51,7 @@
                         {
                             <tr>
                                 <td>
-                                    <img src="/images/product/@product.ImagePath" alt="" class="rounded-circle thumb-md me-1">
+                                    <img src="@UploadDirectory.Products.GetUrl(product.ImageNameInFileSystem)" alt="" class="rounded-circle thumb-md me-1">
                                     @product.Name
                                 </td>
                                 <td>@product.Category.Name</td>

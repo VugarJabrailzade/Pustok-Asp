@@ -130,7 +130,7 @@ $(document).ready(function () {
                     uptBtn.forEach(btn => {
                         btn.addEventListener("click", (e) => {
                             e.preventDefault();
-                            var urel = e.target.parentElement.parentElement.children[0].children[2]
+                            var urel = e.target.parentElement.parentElement.children[0].children[0].href;
                             var updatedName = e.target.closest('form').querySelector('[name="Name"]').value;
 
                             console.log(urel)
@@ -142,8 +142,7 @@ $(document).ready(function () {
                             $.ajax({
                                 type: "POST",
                                 url: urel,
-                                data: JSON.stringify(data),
-                                contentType: "application/json", 
+                                data: data,
                                 success: function (res) {
                                     console.log(res)
 
