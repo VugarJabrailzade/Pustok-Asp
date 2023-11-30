@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<Product>
+@{
     Layout = "_ClientLayout";
 }
 <!-- Begin Slider Area -->
@@ -217,8 +218,7 @@
                         <div class="product-item">
                             <div class="product-img">
                                 <a href="shop.html">
-                                    <img class="primary-img" src="~/client/assets/images/website-images//1-1-270x300.jpg" alt="Product Images" />
-                                    <img class="secondary-img" src="~/client/assets/images/website-images//1-2-270x300.jpg" alt="Product Images" />
+                                   <img class="primary-img" src="@UploadDirectory.Products.GetUrl(product.ImageNameInFileSystem)" alt="Product Images" />
                                 </a>
                                 <div class="product-add-action">
                                     <ul>
@@ -247,7 +247,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="cart.html"
+                                            <a asp-controller="basket" asp-action="add-product" asp-route-productId ="@product.Id"
                                         data-tippy="Add to cart"
                                         data-tippy-inertia="true"
                                         data-tippy-animation="shift-away"

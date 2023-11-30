@@ -102,6 +102,16 @@ public class PustokDbContext : DbContext
                 Name = "XLL",
             });
 
+        modelBuilder.
+            Entity<User>()
+            .HasData(
+            new User
+            {
+                Id = -1,
+                Name = "Admin",
+                LastName = "Admin",
+            });
+
 
         base.OnModelCreating(modelBuilder);
     }
@@ -115,4 +125,6 @@ public class PustokDbContext : DbContext
     public DbSet<Size> Sizes { get; set; }
     public DbSet<ProductColor> ProductColors { get; set; }
     public DbSet<ProductSize> ProductSizes { get; set; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<BasketProduct> BasketProducts { get; set; }
 }

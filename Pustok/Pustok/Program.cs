@@ -34,6 +34,9 @@ public class Program
 
 
             builder.Services
+                .AddScoped<IBasketService, BasketService>()
+                .AddScoped<IUserService, UserService>()
+                .AddScoped<IProductService, ProductService>()
                 .AddScoped<IEmployeeService, EmployeeServiceImp>()
                 .AddScoped<IFileService, FileService>()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CategoryAddResponseViewModel>())

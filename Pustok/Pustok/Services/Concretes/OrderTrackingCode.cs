@@ -22,7 +22,7 @@ namespace Pustok.Services.Concretes
             do
             {
                 numberPart = random.Next(1, 100000).ToString();
-                code = $"E{numberPart.PadLeft(5, '0')}";
+                code = $"OR{numberPart.PadLeft(5, '0')}";
             } while (DoesCodeExist(code));
 
             return code;
