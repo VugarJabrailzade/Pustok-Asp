@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "8VlWbJNww6T79q2PVgYKj6NyG+yQwWUWpL4cyrMBMP0=",
+  "Hash": "UKzo2KCtCQMg3npocmLazCKggAZbJuY0ieomZWuSar8=",
   "Source": "Pustok",
   "BasePath": "_content/Pustok",
   "Mode": "Default",
@@ -20383,6 +20383,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\client\\assets\\images\\website-images\\service.png"
+    },
+    {
+      "Identity": "C:\\Users\\vcebr\\OneDrive\\Desktop\\Pustok\\Pustok\\Pustok\\wwwroot\\client\\assets\\js\\basket-product-quantity-update.js",
+      "SourceId": "Pustok",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\vcebr\\OneDrive\\Desktop\\Pustok\\Pustok\\Pustok\\wwwroot\\",
+      "BasePath": "_content/Pustok",
+      "RelativePath": "client/assets/js/basket-product-quantity-update.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\client\\assets\\js\\basket-product-quantity-update.js"
     },
     {
       "Identity": "C:\\Users\\vcebr\\OneDrive\\Desktop\\Pustok\\Pustok\\Pustok\\wwwroot\\client\\assets\\js\\main.js",

@@ -4289,6 +4289,10 @@
       "PackagePath": "staticwebassets\\client\\assets\\images\\website-images\\service.png"
     },
     {
+      "Id": "C:\\Users\\vcebr\\OneDrive\\Desktop\\Pustok\\Pustok\\Pustok\\wwwroot\\client\\assets\\js\\basket-product-quantity-update.js",
+      "PackagePath": "staticwebassets\\client\\assets\\js\\basket-product-quantity-update.js"
+    },
+    {
       "Id": "C:\\Users\\vcebr\\OneDrive\\Desktop\\Pustok\\Pustok\\Pustok\\wwwroot\\client\\assets\\js\\main.js",
       "PackagePath": "staticwebassets\\client\\assets\\js\\main.js"
     },

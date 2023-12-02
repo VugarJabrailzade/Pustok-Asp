@@ -1,4 +1,4 @@
-﻿@model List<BasketProduct>
+﻿ @model List<BasketProduct>
 
 @{
     Layout = "_ClientLayout";
@@ -47,7 +47,7 @@
 
                                         <tr class="product-details">
                                             <td class="product_remove">
-                                                <a asp-controller="Basket" asp-action="RemoveBasketProduct" asp-route-basketProductId="@basketProduct.Id">
+                                                <a asp-controller="Basket" asp-action="RemoveBasket" asp-route-basketProductId="@basketProduct.Id">
                                                     <i class="pe-7s-close"
                                                    data-tippy="Remove"
                                                    data-tippy-inertia="true"

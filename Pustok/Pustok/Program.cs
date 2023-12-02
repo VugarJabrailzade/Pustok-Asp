@@ -38,6 +38,7 @@ public class Program
                 .AddScoped<IUserService, UserService>()
                 .AddScoped<IProductService, ProductService>()
                 .AddScoped<IEmployeeService, EmployeeServiceImp>()
+                .AddScoped<IOrderService, OrderService>()
                 .AddScoped<IFileService, FileService>()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CategoryAddResponseViewModel>())
                 .AddDbContext<PustokDbContext>(o =>

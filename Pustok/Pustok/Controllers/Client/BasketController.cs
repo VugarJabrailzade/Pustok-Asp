@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Pustok.Database;
+using Pustok.Database.DomainModels;
 using Pustok.Services.Abstract;
+using Pustok.ViewModels.Basket;
 using System.Linq;
 
 namespace Pustok.Controllers.Client;
@@ -37,7 +39,7 @@ public class BasketController : Controller
 
         pustokDbContext.SaveChanges();
 
-        return RedirectToAction("home", "index");
+        return RedirectToAction("index", "home");
     }
 
     [HttpGet("cart")]
@@ -50,6 +52,79 @@ public class BasketController : Controller
 
         return View(basketProduct);
     }
+
+    [HttpGet("remove-basket-product")]
+    public IActionResult RemoveBasket( int basketProductId)
+    {
+        var basketProduct = pustokDbContext.BasketProducts.FirstOrDefault(x => x.UserId == userService.GetCurrentLoggedUser().Id &&
+                            x.Id == basketProductId);
+
+        if(basketProduct == null) NotFound();
+
+
+        pustokDbContext.BasketProducts.Remove(basketProduct);
+        pustokDbContext.SaveChanges();
+
+        return RedirectToAction("cart");
+
+
+    }
+
+    [HttpGet]
+    public IActionResult IncreaseBasketProduct(int basketProductId) 
+    {
+        var basketProduct = pustokDbContext.BasketProducts.FirstOrDefault(x => x.UserId == userService.GetCurrentLoggedUser().Id &&
+                            x.Id == basketProductId);
+
+        if (basketProduct == null) NotFound();
+
+        basketProduct.Quantity++;
+
+
+        pustokDbContext.SaveChanges();
+
+        return Json(new BasketQuantityUpdateResponseViewModel
+        {
+            Total = basketProduct.Quantity * basketProduct.Product.Price,
+            Quantity = basketProduct.Quantity
+        });
+
+
+    }
+    [HttpGet]
+    public IActionResult DecreaseBasketProduct(int basketProductId)
+    {
+        var basketProduct = pustokDbContext.BasketProducts.FirstOrDefault(x => x.UserId == userService.GetCurrentLoggedUser().Id &&
+                            x.Id == basketProductId);
+
+        if (basketProduct == null) NotFound();
+
+        basketProduct.Quantity--;
+
+        IActionResult actionResult;
+        if(basketProduct.Quantity == 0)
+        {
+            pustokDbContext.BasketProducts.Remove(basketProduct);
+            actionResult = NoContent();
+
+        }
+        else
+        {
+            var updateBasketResponse = new BasketQuantityUpdateResponseViewModel
+            {
+                Total = basketProduct.Quantity * basketProduct.Product.Price,
+                Quantity = basketProduct.Quantity
+            };
+
+            actionResult = Json(updateBasketResponse);
+
+
+        }
+            pustokDbContext.SaveChanges();
+            return actionResult;
+
+    }
+
 
 
     public IActionResult Index()
