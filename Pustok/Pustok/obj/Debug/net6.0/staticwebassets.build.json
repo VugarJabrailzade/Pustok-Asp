@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "UKzo2KCtCQMg3npocmLazCKggAZbJuY0ieomZWuSar8=",
+  "Hash": "/92s3KJsTE5W3lPDp5X4wWHTfQ496s8vFONRbf/VjDA=",
   "Source": "Pustok",
   "BasePath": "_content/Pustok",
   "Mode": "Default",
@@ -20423,6 +20423,25 @@
       "OriginalItemSpec": "wwwroot\\client\\assets\\js\\main.js"
     },
     {
+      "Identity": "C:\\Users\\vcebr\\OneDrive\\Desktop\\Pustok\\Pustok\\Pustok\\wwwroot\\client\\assets\\js\\ModalJs.js",
+      "SourceId": "Pustok",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\vcebr\\OneDrive\\Desktop\\Pustok\\Pustok\\Pustok\\wwwroot\\",
+      "BasePath": "_content/Pustok",
+      "RelativePath": "client/assets/js/ModalJs.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\client\\assets\\js\\ModalJs.js"
+    },
+    {
       "Identity": "C:\\Users\\vcebr\\OneDrive\\Desktop\\Pustok\\Pustok\\Pustok\\wwwroot\\client\\assets\\js\\plugins.min.js",
       "SourceId": "Pustok",
       "SourceType": "Discovered",
@@ -21333,6 +21352,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\product\\8ff8ed60-7be1-46a1-bead-a3ab18b76326.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\vcebr\\OneDrive\\Desktop\\Pustok\\Pustok\\Pustok\\wwwroot\\images\\product\\d3135def-db12-4f56-84ae-1a846df125d4.jpg",
+      "SourceId": "Pustok",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\vcebr\\OneDrive\\Desktop\\Pustok\\Pustok\\Pustok\\wwwroot\\",
+      "BasePath": "_content/Pustok",
+      "RelativePath": "images/product/d3135def-db12-4f56-84ae-1a846df125d4.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\product\\d3135def-db12-4f56-84ae-1a846df125d4.jpg"
     },
     {
       "Identity": "C:\\Users\\vcebr\\OneDrive\\Desktop\\Pustok\\Pustok\\Pustok\\wwwroot\\images\\product\\d9f19698-b409-4a6d-aba6-26c0b248eb34.jpg",

@@ -236,7 +236,7 @@
                                         <li class="quuickview-btn"
                                     data-bs-toggle="modal"
                                     data-bs-target="#quickModal">
-                                            <a class="modal-btn" asp-route="home-modal" asp-route-id="@product.Id"
+                                            <a class="modal-btn"  asp-route="home-modal" asp-route-id="@product.Id"
                                         data-tippy="Quickview"
                                         data-tippy-inertia="true"
                                         data-tippy-animation="shift-away"
@@ -2344,25 +2344,22 @@ class="testimonial-area section-space-top-90 section-space-bottom-95"
 
 @section custom_scripts{
     <script>
-        $(".modal-btn").on("click",(e) =>{
+        $(".modal-btn").on("click", (e) => {
             e.preventDefault();
 
             var url = e.target.parentElement.href;
-            
-           
+            console.log(url);
+
             $.ajax({
                 type: "GET",
                 url: url,
-                success: function(data){
+                success: function (data) {
                     $(".modal-body").html(data)
                     console.log(data);
-                };
-            }
+                }
+            })
 
         })
 
-
     </script>
-
-
 }

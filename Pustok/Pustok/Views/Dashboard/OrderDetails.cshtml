@@ -1,0 +1,37 @@
+﻿@model List<OrderProduct>
+<!-- Modal -->
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Size</th>
+                <th>Color</th>
+                <th>Quantity</th>
+                <th>Total</th>
+
+                <!-- Add more columns as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Sample row, replace with dynamic data from your backend -->
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Product.Name</td>
+                    <td>@item.Product.Category.Name</td>
+                    <td>@item.Color.Name</td>
+                    <td>@item.Size.Name</td>
+                    <td>@item.Quantity</td>
+                    <td>@(item.Quantity * item.Product.Price)</td>
+                    <!-- Add more cells as needed -->
+                </tr>
+
+            }
+            <!-- Add more rows based on your data -->
+        </tbody>
+    </table>
+</div>
+<!-- Main Content Area End Here -->

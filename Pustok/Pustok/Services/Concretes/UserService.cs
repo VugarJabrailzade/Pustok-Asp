@@ -18,5 +18,11 @@ namespace Pustok.Services.Concretes
         {
             return pustokDbContext.Users.Single(u=> u.Id == -1);
         }
+
+
+        public string GetFullName(User user)
+        {
+            return user.Name + " " +user.LastName;
+        }
     }
 }

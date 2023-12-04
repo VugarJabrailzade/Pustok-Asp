@@ -4289,6 +4289,10 @@
       "PackagePath": "staticwebassets\\client\\assets\\images\\website-images\\service.png"
     },
     {
+      "Id": "C:\\Users\\vcebr\\OneDrive\\Desktop\\Pustok\\Pustok\\Pustok\\wwwroot\\client\\assets\\js\\ModalJs.js",
+      "PackagePath": "staticwebassets\\client\\assets\\js\\ModalJs.js"
+    },
+    {
       "Id": "C:\\Users\\vcebr\\OneDrive\\Desktop\\Pustok\\Pustok\\Pustok\\wwwroot\\client\\assets\\js\\basket-product-quantity-update.js",
       "PackagePath": "staticwebassets\\client\\assets\\js\\basket-product-quantity-update.js"
     },
@@ -4487,6 +4491,10 @@
     {
       "Id": "C:\\Users\\vcebr\\OneDrive\\Desktop\\Pustok\\Pustok\\Pustok\\wwwroot\\images\\product\\8ff8ed60-7be1-46a1-bead-a3ab18b76326.jpg",
       "PackagePath": "staticwebassets\\images\\product\\8ff8ed60-7be1-46a1-bead-a3ab18b76326.jpg"
+    },
+    {
+      "Id": "C:\\Users\\vcebr\\OneDrive\\Desktop\\Pustok\\Pustok\\Pustok\\wwwroot\\images\\product\\d3135def-db12-4f56-84ae-1a846df125d4.jpg",
+      "PackagePath": "staticwebassets\\images\\product\\d3135def-db12-4f56-84ae-1a846df125d4.jpg"
     },
     {
       "Id": "C:\\Users\\vcebr\\OneDrive\\Desktop\\Pustok\\Pustok\\Pustok\\wwwroot\\images\\product\\d9f19698-b409-4a6d-aba6-26c0b248eb34.jpg",

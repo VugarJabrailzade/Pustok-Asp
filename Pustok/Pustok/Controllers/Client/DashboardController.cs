@@ -2,7 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using Pustok.Database;
 using Pustok.Services.Abstract;
+using Pustok.ViewModels.Dashboard;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Pustok.Controllers.Client
 {
@@ -27,6 +29,23 @@ namespace Pustok.Controllers.Client
 
             return View(order);
         }
+
+        [HttpGet("order-details", Name="order-details-modal")]
+        public async Task<IActionResult> OrderDetails(int id)
+        {
+            var orderProducts  = await _pustokDbContext.OrdersProducts
+           .Where(op => op.OrderId == id && op.Order.User == _userService.GetCurrentLoggedUser())
+           .Include(op => op.Product)
+           .Include(op => op.Product.Category)
+           .Include(op => op.Size)
+           .Include(op => op.Color)
+           .ToListAsync();
+
+            if(orderProducts.Count == null) return NotFound();
+
+            return View(orderProducts);
+        }
+
         public IActionResult Index()
         {
             return View();

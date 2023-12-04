@@ -58,7 +58,8 @@
                                                     <td>@order.OrderProducts.Sum(op => op.Quantity * op.Product.Price)</td>
                                                     <td>$@totalAmount for @totalQuantity items</td>
                                                     <td>
-                                                        <a asp-controller="Dashboard" asp-action="OrderDetails" asp-route-id="@order.Id"  class="btn btn-dark"><span>View</span></a>
+                                                        <a class="modal-btn-order btn btn-primary" data-bs-target="#exampleModalCenter" data-bs-toggle="modal"
+                                                           asp-route="order-details-modal" asp-route-id="@order.Id" ><span>View</span></a>
                                                     </td>
                                                 </tr>
                                             }
@@ -74,3 +75,4 @@
     </div>
 </main>
 <!-- Main Content Area End Here -->
+
