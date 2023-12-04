@@ -68,7 +68,7 @@ namespace Pustok.Controllers.Admin
                 }
                 
             }
-            catch(Exception e)
+            catch(Exception )
             {
                 _logger.LogError("e");   
             }

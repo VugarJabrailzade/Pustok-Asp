@@ -1,6 +1,8 @@
-﻿using Pustok.Database;
+﻿using Microsoft.AspNetCore.Http;
+using Pustok.Database;
 using Pustok.Database.DomainModels;
 using Pustok.Services.Abstract;
+using System;
 using System.Linq;
 
 namespace Pustok.Services.Concretes
@@ -8,15 +10,34 @@ namespace Pustok.Services.Concretes
     public class UserService : IUserService
     {
         private readonly PustokDbContext pustokDbContext;
+        private readonly IHttpContextAccessor httpContextAccessor;
+        private User currentUser = null;
 
-        public UserService(PustokDbContext pustokDbContext)
+        public User CurrentUser
         {
-            this.pustokDbContext = pustokDbContext;
+            get 
+            { 
+                return currentUser ??= GetCurrentLoggedUser(); 
+            }
         }
 
-        public User GetCurrentLoggedUser()
+        public bool IsAuthenticated
         {
-            return pustokDbContext.Users.Single(u=> u.Id == -1);
+            get { return httpContextAccessor.HttpContext.User.Identity.IsAuthenticated; }
+        }
+
+
+        public UserService(PustokDbContext pustokDbContext, IHttpContextAccessor httpContextAccessor)
+        {
+            this.pustokDbContext = pustokDbContext;
+            this.httpContextAccessor = httpContextAccessor;
+        }
+
+        private User GetCurrentLoggedUser()
+        {
+            var currentUser = httpContextAccessor.HttpContext.User.FindFirst(x => x.Type == "Id").Value;
+
+            return pustokDbContext.Users.Single(u=> u.Id == Convert.ToInt32(currentUser));
         }
 
 

@@ -8,7 +8,6 @@ namespace Pustok.Services.Concretes;
 public class BasketService : IBasketService
 {
     private readonly PustokDbContext pustokDbContext;
-    private readonly IUserService userService;
 
     public BasketService(PustokDbContext pustokDbContext)
     {

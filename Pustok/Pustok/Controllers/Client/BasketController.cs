@@ -35,7 +35,7 @@ public class BasketController : Controller
         basketService.AddOrIncrementQuantity(productId,
                     sizeId ?? productService.GetDefaultSizeId(productId),
                     colorId ?? productService.GetDefaultColorId(productId),
-                    userService.GetCurrentLoggedUser());
+                    userService.CurrentUser);
 
         pustokDbContext.SaveChanges();
 
@@ -45,7 +45,7 @@ public class BasketController : Controller
     [HttpGet("cart")]
     public IActionResult GetBasketProduct()
     {
-        var basketProduct = pustokDbContext.BasketProducts.Where(x=> x.User.Id == userService.GetCurrentLoggedUser().Id).
+        var basketProduct = pustokDbContext.BasketProducts.Where(x=> x.User.Id == userService.CurrentUser.Id).
             Include(bp=> bp.Product).
             Include(bp=> bp.Color).
             Include(bp=> bp.Size).ToList();
@@ -56,7 +56,7 @@ public class BasketController : Controller
     [HttpGet("remove-basket-product")]
     public IActionResult RemoveBasket( int basketProductId)
     {
-        var basketProduct = pustokDbContext.BasketProducts.FirstOrDefault(x => x.UserId == userService.GetCurrentLoggedUser().Id &&
+        var basketProduct = pustokDbContext.BasketProducts.FirstOrDefault(x => x.UserId == userService.CurrentUser.Id &&
                             x.Id == basketProductId);
 
         if(basketProduct == null) NotFound();
@@ -73,7 +73,7 @@ public class BasketController : Controller
     [HttpGet]
     public IActionResult IncreaseBasketProduct(int basketProductId) 
     {
-        var basketProduct = pustokDbContext.BasketProducts.FirstOrDefault(x => x.UserId == userService.GetCurrentLoggedUser().Id &&
+        var basketProduct = pustokDbContext.BasketProducts.FirstOrDefault(x => x.UserId == userService.CurrentUser.Id &&
                             x.Id == basketProductId);
 
         if (basketProduct == null) NotFound();
@@ -94,7 +94,7 @@ public class BasketController : Controller
     [HttpGet]
     public IActionResult DecreaseBasketProduct(int basketProductId)
     {
-        var basketProduct = pustokDbContext.BasketProducts.FirstOrDefault(x => x.UserId == userService.GetCurrentLoggedUser().Id &&
+        var basketProduct = pustokDbContext.BasketProducts.FirstOrDefault(x => x.UserId == userService.CurrentUser.Id &&
                             x.Id == basketProductId);
 
         if (basketProduct == null) NotFound();

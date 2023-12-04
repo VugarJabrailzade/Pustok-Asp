@@ -24,7 +24,7 @@ namespace Pustok.Controllers.Client
         public IActionResult Order()
         {
             var order = _pustokDbContext.Orders.Include(x => x.OrderProducts).
-                        ThenInclude(v => v.Product).Where(x => x.User == _userService.GetCurrentLoggedUser()).ToList();
+                        ThenInclude(v => v.Product).Where(x => x.User == _userService.CurrentUser).ToList();
 
 
             return View(order);
@@ -34,7 +34,7 @@ namespace Pustok.Controllers.Client
         public async Task<IActionResult> OrderDetails(int id)
         {
             var orderProducts  = await _pustokDbContext.OrdersProducts
-           .Where(op => op.OrderId == id && op.Order.User == _userService.GetCurrentLoggedUser())
+           .Where(op => op.OrderId == id && op.Order.User == _userService.CurrentUser)
            .Include(op => op.Product)
            .Include(op => op.Product.Category)
            .Include(op => op.Size)

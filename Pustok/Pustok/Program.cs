@@ -31,9 +31,14 @@ public class Program
             .AddControllersWithViews()
             .AddRazorRuntimeCompilation();
 
+        builder.Services.
+            AddAuthentication("Cookie").
+            AddCookie("Cookie");
+
 
 
             builder.Services
+                .AddHttpContextAccessor()
                 .AddScoped<IBasketService, BasketService>()
                 .AddScoped<IUserService, UserService>()
                 .AddScoped<IProductService, ProductService>()
@@ -52,6 +57,9 @@ public class Program
         var app = builder.Build();
 
         app.UseStaticFiles();
+
+        app.UseAuthentication();
+        app.UseAuthorization();
 
         //app.MapGet("/", () => Results.Content(myHtml, "text/html"));
         //app.MapGet("/contact", () => "This is my contact : +994.."); //text/plain

@@ -1,4 +1,6 @@
-﻿ <!-- Begin Main Header Area -->
+﻿@using Pustok.Services.Abstract
+@inject IUserService userservice;
+ <!-- Begin Main Header Area -->
       <header class="main-header-area">
         <div class="header-top bg-pronia-primary d-none d-lg-block">
           <div class="container">
@@ -97,18 +99,24 @@
                         </button>
                         <ul
                           class="dropdown-menu"
-                          aria-labelledby="settingButton"
-                        >
-                          <li>
-                            <a class="dropdown-item" href="my-account.html"
-                              >My account</a
-                            >
-                          </li>
-                          <li>
-                            <a class="dropdown-item" href="login-register.html"
-                              >Login | Register</a
-                            >
-                          </li>
+                          aria-labelledby="settingButton">
+                                        @if (userservice.IsAuthenticated)
+                                        {
+                                            <li>
+                                                <a class="dropdown-item" asp-controller="Dashboard" asp-action="order" >Orders</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" asp-controller="Auth" asp-action="logout">Logout</a>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <a class="dropdown-item" asp-controller="Auth" asp-action="login">Login</a>
+                                            <a class="dropdown-item" asp-controller="Auth" asp-action="register">Register</a>
+
+                                            
+                                        }
+
                         </ul>
                       </li>
                       <li class="d-none d-lg-block">
@@ -876,7 +884,11 @@
           </div>
         </div>
 
+        @if (userservice.IsAuthenticated)
+        {
         @await Component.InvokeAsync("ShopMiniCart")
+        
+        }
 
         <div class="global-overlay"></div>
       </header>

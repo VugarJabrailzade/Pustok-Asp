@@ -33,12 +33,12 @@ namespace Pustok.Controllers.Client
             {
                 CreatedAt = DateTime.UtcNow,
                 Status = OrderStatus.New,
-                User = _userService.GetCurrentLoggedUser(),
+                User = _userService.CurrentUser,
                 TrackingCode = _orderService.GenerateTrackingCode()
             };
 
 
-            var basketProduct = _pustokDbContext.BasketProducts.Where(x=> x.User == _userService.GetCurrentLoggedUser()).ToList();
+            var basketProduct = _pustokDbContext.BasketProducts.Where(x=> x.User == _userService.CurrentUser).ToList();
 
 
 

@@ -373,10 +373,16 @@ namespace Pustok.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
+
                     b.Property<string>("LastName")
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Password")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -387,8 +393,18 @@ namespace Pustok.Migrations
                         new
                         {
                             Id = -1,
+                            Email = "super_admin@gmail.com",
                             LastName = "Admin",
-                            Name = "Admin"
+                            Name = "Admin",
+                            Password = "12345"
+                        },
+                        new
+                        {
+                            Id = -2,
+                            Email = "moderator@gmail.com",
+                            LastName = "Moderator",
+                            Name = "Moderator",
+                            Password = "12345"
                         });
                 });
 

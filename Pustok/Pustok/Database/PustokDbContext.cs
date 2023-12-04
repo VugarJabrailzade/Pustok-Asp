@@ -110,6 +110,16 @@ public class PustokDbContext : DbContext
                 Id = -1,
                 Name = "Admin",
                 LastName = "Admin",
+                Email = "super_admin@gmail.com",
+                Password = "12345"
+            },
+            new User
+            {
+                Id = -2,
+                Name = "Moderator",
+                LastName = "Moderator",
+                Email = "moderator@gmail.com",
+                Password = "12345"
             });
 
 

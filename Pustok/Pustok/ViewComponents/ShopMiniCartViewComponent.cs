@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Pustok.Database;
 using Pustok.Services.Abstract;
 using System.Linq;
@@ -20,7 +21,9 @@ public class ShopMiniCartViewComponent : ViewComponent
 
     public async Task<IViewComponentResult> InvokeAsync()
     {
-        var basketProduct = _pustokDbContext.BasketProducts.Where(x=> x.User == _userService.GetCurrentLoggedUser()).ToList();
+        var basketProduct = _pustokDbContext.BasketProducts.Where(x=> x.User == _userService.CurrentUser).
+            Include(x => x.Product).
+            ToList();
 
         return View(basketProduct);
     }
