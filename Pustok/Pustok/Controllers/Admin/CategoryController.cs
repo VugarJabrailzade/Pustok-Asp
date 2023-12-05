@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,7 @@ using System.Threading.Tasks;
 namespace Pustok.Controllers.Admin
 {
     [Route("admin/category")]
+    [Authorize]
     public class CategoryController : Controller
     {
         public readonly PustokDbContext _pustokDbContext;

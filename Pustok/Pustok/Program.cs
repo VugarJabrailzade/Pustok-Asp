@@ -33,7 +33,11 @@ public class Program
 
         builder.Services.
             AddAuthentication("Cookie").
-            AddCookie("Cookie");
+            AddCookie("Cookie", o =>
+            {
+                o.LoginPath = "/auth/login";
+                o.LogoutPath = "/home/index";
+            });
 
 
 

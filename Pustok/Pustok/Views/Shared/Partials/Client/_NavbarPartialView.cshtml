@@ -93,9 +93,20 @@
                           id="settingButton"
                           data-bs-toggle="dropdown"
                           aria-label="setting"
-                          aria-expanded="false"
-                        >
-                          <i class="pe-7s-users"></i>
+                          aria-expanded="false">
+
+                                        @if (userservice.IsAuthenticated)
+                                        {
+                                            <span>@userservice.GetCurrentUserFullName()</span>
+                                        }
+                                        else
+                                        {
+                                            <i class="pe-7s-users"></i>
+                                            
+                                        }
+
+
+
                         </button>
                         <ul
                           class="dropdown-menu"

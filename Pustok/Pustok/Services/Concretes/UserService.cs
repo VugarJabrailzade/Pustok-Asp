@@ -43,7 +43,12 @@ namespace Pustok.Services.Concretes
 
         public string GetFullName(User user)
         {
-            return user.Name + " " +user.LastName;
+            return user.Name + " " + user.LastName;
+        }
+
+        public string GetCurrentUserFullName()
+        {
+            return GetFullName(CurrentUser);
         }
     }
 }

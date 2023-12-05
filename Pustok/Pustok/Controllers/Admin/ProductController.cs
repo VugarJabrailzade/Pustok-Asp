@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Npgsql;
@@ -13,6 +14,8 @@ using System.Linq;
 namespace Pustok.Controllers.Admin;
 
 [Route("admin/products")]
+[Authorize]
+
 public class ProductController : Controller
 {
     private readonly PustokDbContext _pustokDbContext;

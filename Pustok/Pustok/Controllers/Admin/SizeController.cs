@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Npgsql;
@@ -11,6 +12,8 @@ using System.Linq;
 namespace Pustok.Controllers.Admin
 {
     [Route("admin/size")]
+    [Authorize]
+
     public class SizeController : Controller
     {
         public readonly PustokDbContext _pustokDbContext;
