@@ -376,6 +376,9 @@ namespace Pustok.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("text");
 
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("LastName")
                         .HasColumnType("text");
 
@@ -394,6 +397,7 @@ namespace Pustok.Migrations
                         {
                             Id = -1,
                             Email = "super_admin@gmail.com",
+                            IsAdmin = true,
                             LastName = "Admin",
                             Name = "Admin",
                             Password = "12345"
@@ -402,6 +406,7 @@ namespace Pustok.Migrations
                         {
                             Id = -2,
                             Email = "moderator@gmail.com",
+                            IsAdmin = true,
                             LastName = "Moderator",
                             Name = "Moderator",
                             Password = "12345"

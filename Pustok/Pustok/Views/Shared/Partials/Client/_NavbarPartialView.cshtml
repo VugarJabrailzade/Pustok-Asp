@@ -70,7 +70,7 @@
                     <a href="tel://+00-123-456-789">+00 123 456 789</a>
                   </div>
 
-                  <a href="index.html" class="header-logo">
+                  <a asp-controller="home" asp-action="index" class="header-logo">
                     <img src="~/client/assets/images/logo/dark.png" alt="Header Logo" />
                   </a>
 
@@ -141,14 +141,17 @@
                           <span class="quantity">3</span>
                         </a>
                       </li>
-                      <li class="mobile-menu_wrap d-block d-lg-none">
-                        <a
-                          href="#mobileMenu"
-                          class="mobile-menu_btn toolbar-btn pl-0"
-                        >
-                          <i class="pe-7s-menu"></i>
-                        </a>
-                      </li>
+
+                                @if(userservice.IsAuthenticated && userservice.CurrentUser.IsAdmin)
+                                {
+                                    <li class="ms-2">
+                                        <a asp-route="admin-products">
+                                            Admin Panel
+                                        </a>
+                                    </li>
+
+                                }
+                         
                     </ul>
                   </div>
                 </div>

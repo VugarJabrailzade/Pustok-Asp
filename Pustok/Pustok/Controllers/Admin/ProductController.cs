@@ -14,7 +14,8 @@ using System.Linq;
 namespace Pustok.Controllers.Admin;
 
 [Route("admin/products")]
-[Authorize]
+[Authorize(Roles = "admin")]
+
 
 public class ProductController : Controller
 {
@@ -34,7 +35,7 @@ public class ProductController : Controller
 
     #region Products
 
-    [HttpGet] //admin/products
+    [HttpGet(Name ="admin-products")] //admin/products
     public IActionResult Products()
     {
         var products = _pustokDbContext.Products

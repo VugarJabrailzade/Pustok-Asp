@@ -37,6 +37,7 @@ public class Program
             {
                 o.LoginPath = "/auth/login";
                 o.LogoutPath = "/home/index";
+                o.AccessDeniedPath = "/home/index";
             });
 
 

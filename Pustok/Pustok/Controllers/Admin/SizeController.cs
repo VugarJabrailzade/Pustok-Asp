@@ -12,7 +12,8 @@ using System.Linq;
 namespace Pustok.Controllers.Admin
 {
     [Route("admin/size")]
-    [Authorize]
+    [Authorize(Roles = "admin")]
+
 
     public class SizeController : Controller
     {

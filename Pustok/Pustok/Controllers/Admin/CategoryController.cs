@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace Pustok.Controllers.Admin
 {
     [Route("admin/category")]
-    [Authorize]
+    [Authorize(Roles ="admin")]
     public class CategoryController : Controller
     {
         public readonly PustokDbContext _pustokDbContext;
