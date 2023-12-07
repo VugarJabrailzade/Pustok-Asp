@@ -111,7 +111,7 @@ public class PustokDbContext : DbContext
                 Name = "Admin",
                 LastName = "Admin",
                 Email = "super_admin@gmail.com",
-                Password = "12345",
+                Password = "$2a$11$bYNDBHTm6C/4BsBF8YNgreFZ9iGYb3/NmOKCfph3tU7oBiONIB7Qi",
                 IsAdmin = true
             },
             new User
@@ -120,9 +120,29 @@ public class PustokDbContext : DbContext
                 Name = "Moderator",
                 LastName = "Moderator",
                 Email = "moderator@gmail.com",
-                Password = "12345",
-                IsAdmin = true
+                Password = "$2a$11$bYNDBHTm6C/4BsBF8YNgreFZ9iGYb3/NmOKCfph3tU7oBiONIB7Qi",
+                IsAdmin = true,
+                
             });
+
+        modelBuilder
+           .Entity<UserRole>()
+           .HasKey(ur => new { ur.UserId, ur.Role });
+
+        modelBuilder
+            .Entity<UserRole>()
+            .HasData(
+                new UserRole
+                {
+                    UserId = -1,
+                    Role = Role.SuperAdmin
+                },
+                new UserRole
+                {
+                    UserId = -2,
+                    Role = Role.Moderator
+                }
+            );
 
 
         base.OnModelCreating(modelBuilder);
@@ -141,4 +161,5 @@ public class PustokDbContext : DbContext
     public DbSet<BasketProduct> BasketProducts { get; set; }
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderProduct> OrdersProducts { get; set;}
+    public DbSet<UserRole> UserRoles { get; set; }
 }

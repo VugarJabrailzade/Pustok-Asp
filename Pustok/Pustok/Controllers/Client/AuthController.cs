@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using BCrypt.Net;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -35,13 +36,20 @@ namespace Pustok.Controllers.Client
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            var user = _pustokDbContext.Users.FirstOrDefault(x => x.Email == model.Email && x.Password == model.Password);
+            var user = _pustokDbContext.Users.FirstOrDefault(x => x.Email == model.Email);
 
             if(user == null)
             {
                 ModelState.AddModelError("Email", "Email or Password is wrong!");
                 return View();
             }
+
+            if(!BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
+            {
+                ModelState.AddModelError("Email", "Email or Password is wrong!");
+                return View();
+            }
+
 
             var claims = new List<Claim>()
             {
@@ -92,7 +100,7 @@ namespace Pustok.Controllers.Client
                 Name = model.Name,
                 LastName = model.Surname,
                 Email = model.Email,
-                Password = model.Password
+                Password = BCrypt.Net.BCrypt.HashPassword(model.Password)
             };
 
             _pustokDbContext.Users.Add(user);

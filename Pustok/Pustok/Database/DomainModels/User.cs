@@ -1,4 +1,6 @@
-﻿namespace Pustok.Database.DomainModels
+﻿using System.Collections.Generic;
+
+namespace Pustok.Database.DomainModels
 {
     public class User
     {
@@ -8,5 +10,7 @@
         public string Email { get; set; }
         public string Password { get; set; }
         public bool IsAdmin { get; set; }
+
+        public List<UserRole> UserRole { get; set; }
     }
 }

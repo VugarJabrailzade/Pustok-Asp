@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vcebr\\OneDrive\\Desktop\\Pustok\\Pustok\\Pustok\\Pustok.csproj": {}
+    "C:\\Users\\vcebr\\Pustok\\Pustok\\Pustok\\Pustok.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vcebr\\OneDrive\\Desktop\\Pustok\\Pustok\\Pustok\\Pustok.csproj": {
+    "C:\\Users\\vcebr\\Pustok\\Pustok\\Pustok\\Pustok.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vcebr\\OneDrive\\Desktop\\Pustok\\Pustok\\Pustok\\Pustok.csproj",
+        "projectUniqueName": "C:\\Users\\vcebr\\Pustok\\Pustok\\Pustok\\Pustok.csproj",
         "projectName": "Pustok",
-        "projectPath": "C:\\Users\\vcebr\\OneDrive\\Desktop\\Pustok\\Pustok\\Pustok\\Pustok.csproj",
+        "projectPath": "C:\\Users\\vcebr\\Pustok\\Pustok\\Pustok\\Pustok.csproj",
         "packagesPath": "C:\\Users\\vcebr\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vcebr\\OneDrive\\Desktop\\Pustok\\Pustok\\Pustok\\obj\\",
+        "outputPath": "C:\\Users\\vcebr\\Pustok\\Pustok\\Pustok\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -45,6 +45,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.3, )"
+            },
             "FluentValidation": {
               "target": "Package",
               "version": "[11.8.0, )"
@@ -70,6 +74,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[6.0.24, )"
+            },
+            "NETCore.MailKit": {
+              "target": "Package",
+              "version": "[2.1.0, )"
             },
             "Npgsql": {
               "target": "Package",

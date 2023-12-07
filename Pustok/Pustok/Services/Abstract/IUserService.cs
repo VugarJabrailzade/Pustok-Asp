@@ -8,5 +8,6 @@ namespace Pustok.Services.Abstract
         bool IsAuthenticated { get; }
         string GetFullName(User user);
         string GetCurrentUserFullName();
+        bool IsUserSeeded(User user);
     }
 }

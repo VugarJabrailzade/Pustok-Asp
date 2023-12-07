@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Pustok.Database;
 using Pustok.Database.DomainModels;
 using Pustok.Services.Abstract;
@@ -37,7 +38,14 @@ namespace Pustok.Services.Concretes
         {
             var currentUser = httpContextAccessor.HttpContext.User.FindFirst(x => x.Type == "Id").Value;
 
-            return pustokDbContext.Users.Single(u=> u.Id == Convert.ToInt32(currentUser));
+            return pustokDbContext.Users.
+                Include(x=> x.UserRole).
+                Single(u=> u.Id == Convert.ToInt32(currentUser));
+        }
+
+        public bool IsUserSeeded(User user)
+        {
+            return user.Id < 0;
         }
 
 

@@ -413,6 +413,31 @@ namespace Pustok.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Pustok.Database.DomainModels.UserRole", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Role")
+                        .HasColumnType("integer");
+
+                    b.HasKey("UserId", "Role");
+
+                    b.ToTable("UserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = -1,
+                            Role = 0
+                        },
+                        new
+                        {
+                            UserId = -2,
+                            Role = 2
+                        });
+                });
+
             modelBuilder.Entity("Pustok.Database.DomainModels.BasketProduct", b =>
                 {
                     b.HasOne("Pustok.Database.DomainModels.Color", "Color")
@@ -552,6 +577,17 @@ namespace Pustok.Migrations
                     b.Navigation("Size");
                 });
 
+            modelBuilder.Entity("Pustok.Database.DomainModels.UserRole", b =>
+                {
+                    b.HasOne("Pustok.Database.DomainModels.User", "User")
+                        .WithMany("Roles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Pustok.Database.DomainModels.Color", b =>
                 {
                     b.Navigation("ProductColors");
@@ -572,6 +608,11 @@ namespace Pustok.Migrations
             modelBuilder.Entity("Pustok.Database.DomainModels.Size", b =>
                 {
                     b.Navigation("ProductSizes");
+                });
+
+            modelBuilder.Entity("Pustok.Database.DomainModels.User", b =>
+                {
+                    b.Navigation("Roles");
                 });
 #pragma warning restore 612, 618
         }

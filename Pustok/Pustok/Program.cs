@@ -39,7 +39,8 @@ public class Program
                 o.LogoutPath = "/home/index";
                 o.AccessDeniedPath = "/home/index";
             });
-
+        
+        
 
 
             builder.Services
