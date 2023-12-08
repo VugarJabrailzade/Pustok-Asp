@@ -172,6 +172,41 @@ $(document).ready(function () {
 
 })
 
+$(document).ready(function(){
+
+    var emailDelBtn = document.querySelectorAll(".emailDelBtn");
+
+    emailDelBtn.forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            var href = e.target.parentElement.href
+
+            console.log(href);
+
+            $.ajax({
+                type: "DELETE",
+                url: href,
+                success: function (result) {
+                    $.ajax({
+                        type: "GET",
+                        url: '/admin/email/list',
+                        success: function (res) {
+                            window.location.href = '/admin/email/list'
+
+                            console.log(res)
+
+                        }
+                    })
+
+                }
+            })
+
+
+        })
+    })
+})
+
 
 
 
