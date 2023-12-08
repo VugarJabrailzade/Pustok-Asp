@@ -39,16 +39,17 @@
                     <thead>
                         <tr>
                             <th>Name</th>
+                            <th>Title</th>
+                            <th>Content</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var emails in Model)
                         {
                             <tr>
-                                <td>@emails.To</td>
+                                <td>@string.Join(", ", emails.To)</td>
                                 <td>@emails.Title</td>
                                 <td>@emails.Content</td>
-                                <td>@emails.Email</td>
                             </tr>
                         }
                     </tbody>

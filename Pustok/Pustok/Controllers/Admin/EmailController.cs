@@ -42,11 +42,11 @@ namespace Pustok.Controllers.Admin
         [HttpPost("list",Name ="send-email")]
         public IActionResult EmailSend(EmailMessageContent model)
         {
-            var to = new List<string>(model.To).ToString();
+            var to = model.To;
             var title = model.Title;
             var content = model.Content;
 
-            var message = new EmailMessage(new string[] { to }, title, content );
+            var message = new EmailMessage(to, title, content );
             _emailSender.SendEmail(message);
 
             _pustokDbContext.EmailMessageContents.Add(model);
