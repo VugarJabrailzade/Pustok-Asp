@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Pustok.Contracts;
+using System.Collections.Generic;
 
 namespace Pustok.Database.DomainModels
 {

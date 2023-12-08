@@ -1,10 +1,11 @@
-﻿using MimeKit;
-using Pustok.Database.DomainModels;
-using System.Net.Mail;
+﻿using MailKit.Net.Smtp;
+using MimeKit;
+using Pustok.Contracts;
+using Pustok.Services.Abstract;
 
 namespace Pustok.Services.Concretes;
 
-public class EmailSender
+public class EmailSender : IEmailSender
 {
     private readonly EmailConfiguration _emailConfig;
 
@@ -15,33 +16,52 @@ public class EmailSender
 
     public void SendEmail(EmailMessage message)
     {
-        var emailMessage = (message);
-
-        SendEmail(emailMessage);
+        var emailMessage = CreateEmailMessage(message);
+        Send(emailMessage);
     }
 
-    //private MimeMessage CreateEmailMessage(EmailMessage message)
-    //{
-    //    var emailMessage = new MimeMessage();
-    //    emailMessage.From.Add(new MailboxAddress(_emailConfig));
-    //    emailMessage.To.AddRange(message.To);
-    //    emailMessage.Subject= message.Subject;
-    //    emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Text) { Text = message.Content };
+    private MimeMessage CreateEmailMessage(EmailMessage message)
+    {
+        var emailMessage = new MimeMessage();
+        emailMessage.From.Add(new MailboxAddress(_emailConfig.Username,_emailConfig.From));
+        emailMessage.To.AddRange(message.To);
+        emailMessage.Subject = message.Subject;
+        emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Text) { Text = message.Content };
 
-    //    return emailMessage;
-    //}
+        return emailMessage;
+    }
 
-    //private void Send(MimeMessage mailMessage)
-    //{
-    //    using(var client = new SmtpClient)
-    //    {
-    //        try
-    //        {
-    //            client.
-    //        }
+    MimeMessage IEmailSender.CreateEmailMessage(EmailMessage message)
+    {
+        throw new System.NotImplementedException();
+    }
 
+    private void Send(MimeMessage mailMessage)
+    {
+        using (var client = new SmtpClient())
+        {
+            try
+            {
+                client.Connect(_emailConfig.SmtpServer, _emailConfig.Port, true);
+                client.Authenticate(_emailConfig.Username, _emailConfig.Password, default);
 
+                client.Send(mailMessage);
 
-    //    }
-    //}
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                client.Disconnect(true);
+            }
+
+        }
+    }
+
+    void IEmailSender.Send(MimeMessage mailMessage)
+    {
+        throw new System.NotImplementedException();
+    }
 }

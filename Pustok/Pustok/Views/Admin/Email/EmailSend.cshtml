@@ -1,0 +1,32 @@
+﻿@model EmailMessageContent
+@{
+    Layout = "_AdminLayout";
+}
+
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <p class="text-muted mb-0">Update Product.</p>
+        </div><!--end card-header-->
+        <div class="card-body">
+            <form method="POST" asp-route="send-email">
+                <div class="form-row  col-md-6">
+                    <div class="form-group col-md-6">
+                        <label asp-for="To">To</label>
+                        <input type="email" class="form-control" asp-for="To" placeholder="To">
+                        <span asp-validation-for="To"></span>
+                    </div>
+                </div>
+                <div class="form-group  col-md-6">
+                    <label asp-for="Title">Title</label>
+                    <input type="text" class="form-control" asp-for="Title">
+                </div>
+                <div class="form-group  col-md-6">
+                    <label asp-for="Content">Content</label>
+                    <textarea class="form-control" asp-for="Content"  rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send</button>
+            </form>
+        </div><!--end card-body-->
+    </div><!--end card-->
+</div>

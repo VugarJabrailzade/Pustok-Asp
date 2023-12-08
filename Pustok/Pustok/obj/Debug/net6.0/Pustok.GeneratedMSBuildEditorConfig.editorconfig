@@ -34,6 +34,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ29sb3JcQ29sb3JzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/vcebr/Pustok/Pustok/Pustok/Views/Admin/Email/Email.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRW1haWxcRW1haWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vcebr/Pustok/Pustok/Pustok/Views/Admin/Email/EmailSend.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRW1haWxcRW1haWxTZW5kLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/vcebr/Pustok/Pustok/Pustok/Views/Admin/Employee/EmployeeAdd.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRW1wbG95ZWVcRW1wbG95ZWVBZGQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

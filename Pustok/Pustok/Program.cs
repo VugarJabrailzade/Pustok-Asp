@@ -11,6 +11,7 @@ using FluentValidation.AspNetCore;
 using Pustok.Validation;
 using Pustok.ViewModels.Product;
 using Pustok.Services.Concretes;
+using Pustok.Extensions;
 
 namespace Pustok;
 
@@ -27,52 +28,41 @@ public class Program
         //boiler-plate 
         var builder = WebApplication.CreateBuilder(args);
 
-        builder.Services
-            .AddControllersWithViews()
-            .AddRazorRuntimeCompilation();
-
-        builder.Services.
-            AddAuthentication("Cookie").
-            AddCookie("Cookie", o =>
-            {
-                o.LoginPath = "/auth/login";
-                o.LogoutPath = "/home/index";
-                o.AccessDeniedPath = "/home/index";
-            });
-        
-        
-
-
-            builder.Services
-                .AddHttpContextAccessor()
-                .AddScoped<IBasketService, BasketService>()
-                .AddScoped<IUserService, UserService>()
-                .AddScoped<IProductService, ProductService>()
-                .AddScoped<IEmployeeService, EmployeeServiceImp>()
-                .AddScoped<IOrderService, OrderService>()
-                .AddScoped<IFileService, FileService>()
-                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CategoryAddResponseViewModel>())
-                .AddDbContext<PustokDbContext>(o =>
-                {
-                    o.UseNpgsql(DatabaseConstants.CONNECTION_STRING);
-                });
+        ConfigureServices(builder);
 
 
         //Middleware pipeline
 
         var app = builder.Build();
 
+        ConfigureMiddleWareServices(app);
+
+        app.Run();
+    }
+
+    private static void ConfigureServices(WebApplicationBuilder builder)
+    {
+        builder.Services.AddConrollers();
+
+        builder.Services.AddAuth();
+
+        builder.Services.AddCustomService();    
+
+        builder.Services.AddEmailConfiguration(builder.Configuration);
+    }
+
+
+    private static void ConfigureMiddleWareServices(WebApplication app)
+    {
         app.UseStaticFiles();
 
         app.UseAuthentication();
         app.UseAuthorization();
 
-        //app.MapGet("/", () => Results.Content(myHtml, "text/html"));
-        //app.MapGet("/contact", () => "This is my contact : +994.."); //text/plain
-        //app.MapGet("/about", () => Results.Content("<h1>About in World!</h1>", "text/html"));
 
         app.MapControllerRoute("default", "{controller=Home}/{action=Index}");
 
-        app.Run();
     }
+
+
 }

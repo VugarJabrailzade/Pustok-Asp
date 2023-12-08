@@ -162,4 +162,6 @@ public class PustokDbContext : DbContext
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderProduct> OrdersProducts { get; set;}
     public DbSet<UserRole> UserRoles { get; set; }
+    public DbSet<EmailMessageContent> EmailMessageContents { get; set; }
+    
 }
