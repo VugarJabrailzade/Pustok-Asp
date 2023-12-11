@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Pustok.Contracts;
 using Pustok.Database;
 using Pustok.Database.DomainModels;
 using Pustok.Services.Abstract;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Pustok.Services.Concretes
@@ -25,6 +27,12 @@ namespace Pustok.Services.Concretes
         public bool IsAuthenticated
         {
             get { return httpContextAccessor.HttpContext.User.Identity.IsAuthenticated; }
+        }
+
+        public bool IsCurrentUserInRole(params string[] roles)
+        {
+            return roles.Any(r => httpContextAccessor.HttpContext.User.IsInRole(r));
+
         }
 
 
@@ -57,6 +65,18 @@ namespace Pustok.Services.Concretes
         public string GetCurrentUserFullName()
         {
             return GetFullName(CurrentUser);
+        }
+
+        public List<User> GetWholeStaff()
+        {
+
+            var staff = pustokDbContext.Users.Where(v=> v.UserRole.Any(u=> 
+                        u.Role == Role.Moderator ||
+                        u.Role == Role.Admin || 
+                        u.Role == Role.SuperAdmin || 
+                        u.Role == Role.SMM)).ToList();
+
+            return staff;
         }
     }
 }

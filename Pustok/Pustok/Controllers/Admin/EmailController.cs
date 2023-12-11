@@ -15,7 +15,8 @@ using System.Threading.Tasks;
 namespace Pustok.Controllers.Admin
 {
     [Route("admin/email")]
-    [Authorize(Roles ="admin")]
+    [Authorize(Roles = RoleNames.SuperAdmin)]
+
     public class EmailController : Controller
     {
         private readonly IEmailSender _emailSender;

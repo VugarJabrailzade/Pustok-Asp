@@ -757,6 +757,10 @@
       "PackagePath": "staticwebassets\\admin\\assets\\js\\ModalJs.js"
     },
     {
+      "Id": "C:\\Users\\vcebr\\Pustok\\Pustok\\Pustok\\wwwroot\\admin\\assets\\js\\Notification.js",
+      "PackagePath": "staticwebassets\\admin\\assets\\js\\Notification.js"
+    },
+    {
       "Id": "C:\\Users\\vcebr\\Pustok\\Pustok\\Pustok\\wwwroot\\admin\\assets\\js\\app.js",
       "PackagePath": "staticwebassets\\admin\\assets\\js\\app.js"
     },

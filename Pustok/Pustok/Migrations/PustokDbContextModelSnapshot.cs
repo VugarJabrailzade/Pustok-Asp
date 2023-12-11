@@ -225,6 +225,33 @@ namespace Pustok.Migrations
                     b.ToTable("Employees");
                 });
 
+            modelBuilder.Entity("Pustok.Database.DomainModels.Notifications", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Notifications");
+                });
+
             modelBuilder.Entity("Pustok.Database.DomainModels.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -426,7 +453,7 @@ namespace Pustok.Migrations
                         {
                             Id = -1,
                             Email = "super_admin@gmail.com",
-                            IsAdmin = true,
+                            IsAdmin = false,
                             LastName = "Admin",
                             Name = "Admin",
                             Password = "$2a$11$bYNDBHTm6C/4BsBF8YNgreFZ9iGYb3/NmOKCfph3tU7oBiONIB7Qi"
@@ -435,7 +462,7 @@ namespace Pustok.Migrations
                         {
                             Id = -2,
                             Email = "moderator@gmail.com",
-                            IsAdmin = true,
+                            IsAdmin = false,
                             LastName = "Moderator",
                             Name = "Moderator",
                             Password = "$2a$11$bYNDBHTm6C/4BsBF8YNgreFZ9iGYb3/NmOKCfph3tU7oBiONIB7Qi"
@@ -511,6 +538,17 @@ namespace Pustok.Migrations
                         .IsRequired();
 
                     b.Navigation("Department");
+                });
+
+            modelBuilder.Entity("Pustok.Database.DomainModels.Notifications", b =>
+                {
+                    b.HasOne("Pustok.Database.DomainModels.User", "User")
+                        .WithMany("Notifications")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Pustok.Database.DomainModels.Order", b =>
@@ -641,6 +679,8 @@ namespace Pustok.Migrations
 
             modelBuilder.Entity("Pustok.Database.DomainModels.User", b =>
                 {
+                    b.Navigation("Notifications");
+
                     b.Navigation("UserRole");
                 });
 #pragma warning restore 612, 618

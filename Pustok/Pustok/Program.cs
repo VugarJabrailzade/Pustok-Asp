@@ -12,6 +12,7 @@ using Pustok.Validation;
 using Pustok.ViewModels.Product;
 using Pustok.Services.Concretes;
 using Pustok.Extensions;
+using Pustok.Hubs;
 
 namespace Pustok;
 
@@ -49,6 +50,7 @@ public class Program
         builder.Services.AddCustomService();    
 
         builder.Services.AddEmailConfiguration(builder.Configuration);
+        builder.Services.AddSignalR();
     }
 
 
@@ -61,6 +63,8 @@ public class Program
 
 
         app.MapControllerRoute("default", "{controller=Home}/{action=Index}");
+
+        app.MapHub<AlertHub>("alerthub");
 
     }
 

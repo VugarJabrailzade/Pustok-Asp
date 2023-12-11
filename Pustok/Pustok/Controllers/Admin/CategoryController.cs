@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
+using Pustok.Contracts;
 using Pustok.Database;
 using Pustok.Database.DomainModels;
 using Pustok.ViewModels.Product;
@@ -16,7 +17,8 @@ using System.Threading.Tasks;
 namespace Pustok.Controllers.Admin
 {
     [Route("admin/category")]
-    [Authorize(Roles ="admin")]
+    [Authorize(Roles = RoleNames.SuperAdmin)]
+
     public class CategoryController : Controller
     {
         public readonly PustokDbContext _pustokDbContext;

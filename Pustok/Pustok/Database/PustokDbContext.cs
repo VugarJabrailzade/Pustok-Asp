@@ -112,7 +112,6 @@ public class PustokDbContext : DbContext
                 LastName = "Admin",
                 Email = "super_admin@gmail.com",
                 Password = "$2a$11$bYNDBHTm6C/4BsBF8YNgreFZ9iGYb3/NmOKCfph3tU7oBiONIB7Qi",
-                IsAdmin = true
             },
             new User
             {
@@ -121,7 +120,6 @@ public class PustokDbContext : DbContext
                 LastName = "Moderator",
                 Email = "moderator@gmail.com",
                 Password = "$2a$11$bYNDBHTm6C/4BsBF8YNgreFZ9iGYb3/NmOKCfph3tU7oBiONIB7Qi",
-                IsAdmin = true,
                 
             });
 
@@ -163,5 +161,6 @@ public class PustokDbContext : DbContext
     public DbSet<OrderProduct> OrdersProducts { get; set;}
     public DbSet<UserRole> UserRoles { get; set; }
     public DbSet<EmailMessageContent> EmailMessageContents { get; set; }
+    public DbSet<Notifications> Notifications { get; set; }
     
 }

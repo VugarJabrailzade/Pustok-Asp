@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.EntityFrameworkCore;
 using Pustok.Database;
 using Pustok.Database.DomainModels;
 using Pustok.Services.Abstract;
@@ -36,7 +37,9 @@ namespace Pustok.Controllers.Client
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            var user = _pustokDbContext.Users.FirstOrDefault(x => x.Email == model.Email);
+            var user = _pustokDbContext.Users.
+                Include(x=> x.UserRole).
+                FirstOrDefault(x => x.Email == model.Email);
 
             if(user == null)
             {
@@ -56,10 +59,13 @@ namespace Pustok.Controllers.Client
                 new Claim("Id", user.Id.ToString())
             };
 
-            if (user.IsAdmin)
+            foreach (var userRole in user.UserRole)
             {
-                claims.Add(new Claim(ClaimTypes.Role, "admin"));
+
+                claims.Add(new Claim(ClaimTypes.Role, userRole.Role.ToString()));
             }
+
+
 
             var claimsIdentity= new ClaimsIdentity(claims, "Cookie");
             var claimsPricipal = new ClaimsPrincipal(claimsIdentity);

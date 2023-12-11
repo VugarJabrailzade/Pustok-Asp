@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Npgsql;
+using Pustok.Contracts;
 using Pustok.Database;
 using Pustok.Database.DomainModels;
 using Pustok.ViewModels.Product;
@@ -12,7 +13,8 @@ using System.Linq;
 namespace Pustok.Controllers.Admin
 {
     [Route("admin/size")]
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = RoleNames.SuperAdmin)]
+
 
 
     public class SizeController : Controller

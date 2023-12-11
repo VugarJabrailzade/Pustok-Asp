@@ -63,6 +63,10 @@ namespace Pustok.Controllers.Client
 
             _pustokDbContext.BasketProducts.RemoveRange(basketProduct);
 
+
+            var notification = _orderService.CreatOrderNotifications(order);
+
+
             _pustokDbContext.SaveChanges();
 
             return RedirectToAction("Order","Dashboard");

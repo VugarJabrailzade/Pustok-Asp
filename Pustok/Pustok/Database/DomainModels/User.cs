@@ -13,5 +13,6 @@ namespace Pustok.Database.DomainModels
         public bool IsAdmin { get; set; }
 
         public List<UserRole> UserRole { get; set; }
+        public List<Notifications> Notifications { get; set; }
     }
 }
