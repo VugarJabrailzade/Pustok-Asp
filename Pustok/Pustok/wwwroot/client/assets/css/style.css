@@ -1663,7 +1663,7 @@ blockquote p {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  min-width: 7rem;
+  min-width: 7rem !important;
 }
 
 .dropdown-menu.show {

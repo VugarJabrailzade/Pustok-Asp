@@ -765,14 +765,6 @@
       "PackagePath": "staticwebassets\\admin\\assets\\js\\app.js"
     },
     {
-      "Id": "C:\\Users\\vcebr\\Pustok\\Pustok\\Pustok\\wwwroot\\admin\\assets\\js\\app.min.js",
-      "PackagePath": "staticwebassets\\admin\\assets\\js\\app.min.js"
-    },
-    {
-      "Id": "C:\\Users\\vcebr\\Pustok\\Pustok\\Pustok\\wwwroot\\admin\\assets\\js\\app.min.js.map",
-      "PackagePath": "staticwebassets\\admin\\assets\\js\\app.min.js.map"
-    },
-    {
       "Id": "C:\\Users\\vcebr\\Pustok\\Pustok\\Pustok\\wwwroot\\admin\\assets\\pages\\analytics-customers.init.js",
       "PackagePath": "staticwebassets\\admin\\assets\\pages\\analytics-customers.init.js"
     },
@@ -4295,6 +4287,10 @@
     {
       "Id": "C:\\Users\\vcebr\\Pustok\\Pustok\\Pustok\\wwwroot\\client\\assets\\js\\ModalJs.js",
       "PackagePath": "staticwebassets\\client\\assets\\js\\ModalJs.js"
+    },
+    {
+      "Id": "C:\\Users\\vcebr\\Pustok\\Pustok\\Pustok\\wwwroot\\client\\assets\\js\\UserNotification.js",
+      "PackagePath": "staticwebassets\\client\\assets\\js\\UserNotification.js"
     },
     {
       "Id": "C:\\Users\\vcebr\\Pustok\\Pustok\\Pustok\\wwwroot\\client\\assets\\js\\basket-product-quantity-update.js",

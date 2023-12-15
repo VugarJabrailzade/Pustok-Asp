@@ -162,5 +162,6 @@ public class PustokDbContext : DbContext
     public DbSet<UserRole> UserRoles { get; set; }
     public DbSet<EmailMessageContent> EmailMessageContents { get; set; }
     public DbSet<Notifications> Notifications { get; set; }
+    public DbSet<UserNotifications> UserNotifications { get; set; }
     
 }

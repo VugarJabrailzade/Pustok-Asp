@@ -1,12 +1,16 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Asn1.Cmp;
 using Pustok.Contracts;
 using Pustok.Database;
 using Pustok.Database.DomainModels;
 using Pustok.Services.Abstract;
+using Pustok.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 
 namespace Pustok.Services.Concretes
 {
@@ -14,7 +18,20 @@ namespace Pustok.Services.Concretes
     {
         private readonly PustokDbContext pustokDbContext;
         private readonly IHttpContextAccessor httpContextAccessor;
+        private static  List<UserConnectionViewModel> userConnection;
         private User currentUser = null;
+
+        static UserService()
+        {
+            userConnection = new List<UserConnectionViewModel>();
+
+        }
+
+        public UserService(PustokDbContext pustokDbContext, IHttpContextAccessor httpContextAccessor)
+        {
+            this.pustokDbContext = pustokDbContext;
+            this.httpContextAccessor = httpContextAccessor;
+        }
 
         public User CurrentUser
         {
@@ -35,20 +52,45 @@ namespace Pustok.Services.Concretes
 
         }
 
-
-        public UserService(PustokDbContext pustokDbContext, IHttpContextAccessor httpContextAccessor)
+        public List<string> GetUserConnection(int userId)
         {
-            this.pustokDbContext = pustokDbContext;
-            this.httpContextAccessor = httpContextAccessor;
+            return userConnection.SingleOrDefault(uc => uc.UserId == userId)?.ConnectionId ?? new List<string>();
         }
+
+        public void AddCurrentUserConnection(string userConnnection)
+        {
+            userConnection.Add(new UserConnectionViewModel
+            {
+                UserId = CurrentUser.Id,
+                ConnectionId = new List<string> { userConnnection }
+            });
+        }
+
+        public void RemoveCurrentUserConnection()
+        {
+            userConnection.RemoveAll(uc => uc.UserId == CurrentUser.Id);
+        }
+
+
 
         private User GetCurrentLoggedUser()
         {
-            var currentUser = httpContextAccessor.HttpContext.User.FindFirst(x => x.Type == "Id").Value;
+            try
+            {
+                var currentUserId = httpContextAccessor.HttpContext.User
+                .FindFirst(c => c.Type == "Id").Value;
+                
+                return pustokDbContext.Users
+                    .Include(u => u.UserRole)
+                    .Single(u => u.Id == Convert.ToInt32(currentUserId));
 
-            return pustokDbContext.Users.
-                Include(x=> x.UserRole).
-                Single(u=> u.Id == Convert.ToInt32(currentUser));
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+
         }
 
         public bool IsUserSeeded(User user)
@@ -77,6 +119,12 @@ namespace Pustok.Services.Concretes
                         u.Role == Role.SMM)).ToList();
 
             return staff;
+        }
+        public List<User> GetWholeClients()
+        {
+            var clients = pustokDbContext.Users.Where(user => !user.UserRole.Any(userRole => userRole.Role != null)).ToList();
+
+            return clients;
         }
     }
 }

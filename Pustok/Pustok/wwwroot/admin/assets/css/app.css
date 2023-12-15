@@ -1201,12 +1201,13 @@ File: Horizontal-nav
   border-radius: 0.5rem;
 }
 
+
 .navbar-toggle {
-  border: 0;
-  position: relative;
-  padding: 0;
-  margin: 0;
-  cursor: pointer;
+    border: 0;
+    position: relative;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
 }
 .navbar-toggle:hover {
   background-color: transparent;

@@ -22,6 +22,7 @@ public class NotificationViewComponent : ViewComponent
     public async Task<IViewComponentResult> InvokeAsync()
     {
         var notifications = _pustokDbContext.Notifications.Where(x => x.User == _userService.CurrentUser).
+                            OrderByDescending(n=> n.CreatedDate).
                             ToList();
 
         return View(notifications);

@@ -1,0 +1,20 @@
+﻿@model List<UserNotifications>
+
+@foreach (var notification in Model)
+{
+
+    <a href="#" class="dropdown-item py-xl">
+        <small class="float-end text-muted ps-2">@notification.CreatedDate.ToString("dd/yyyy hh:mm")</small>
+        <div class="media">
+            <div class="avatar-md bg-soft-primary">
+                <i class="ti ti-chart-arcs"></i>
+            </div>
+            <div class="media-body align-self-center ms-2 text-truncate">
+                <h6 class="my-0 fw-normal text-dark">@notification.Title</h6>
+                <small class="text-muted mb-0">@notification.Content</small>
+            </div><!--end media-body-->
+        </div><!--end media-->
+    </a>
+
+    <!--end-item-->
+}

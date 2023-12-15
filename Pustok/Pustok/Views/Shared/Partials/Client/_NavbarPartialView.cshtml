@@ -1,5 +1,6 @@
 ﻿@using Pustok.Services.Abstract
 @inject IUserService userservice;
+
  <!-- Begin Main Header Area -->
       <header class="main-header-area">
         <div class="header-top bg-pronia-primary d-none d-lg-block">
@@ -135,6 +136,7 @@
                           <i class="pe-7s-like"></i>
                         </a>
                       </li>
+
                       <li class="minicart-wrap me-3 me-lg-0">
                         <a href="#miniCart" class="minicart-btn toolbar-btn">
                           <i class="pe-7s-shopbag"></i>
@@ -142,17 +144,42 @@
                         </a>
                       </li>
 
-                                @if(userservice.IsAuthenticated && userservice.CurrentUser.IsAdmin)
+                                @if(userservice.IsAuthenticated && userservice.CurrentUser.UserRole.Any())
                                 {
                                     <li class="ms-2">
-                                        <a asp-route="admin-products">
+                                        <a  asp-route="admin-products">
                                             Admin Panel
                                         </a>
                                     </li>
 
                                 }
-                         
-                    </ul>
+                    <li class="dropdown notification-list">
+                                    <a class="nav-link dropdown-toggle arrow-none nav-icon" data-bs-toggle="dropdown" href="#" role="button"
+                                       aria-haspopup="false" aria-expanded="false">
+                                        <i class="fa-regular fa-bell"></i>
+
+                                        <span class="alert-badge"></span>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end dropdown-xl pt-0">
+
+                                        <h6 class="dropdown-item-text font-15 m-0 py-3 border-bottom d-flex justify-content-between align-items-center">
+                                            Notifications <span class="badge bg-soft-primary badge-pill"></span>
+                                        </h6>
+                                        <div class="notification-menu alert-user-menu"  data-simplebar  style="max-height:400px; overflow:scroll; box-sizing:border-box;">
+
+                                            <!-- item-->
+                                            @await Component.InvokeAsync("UserNotification")
+                                            <!-- item-->
+
+                                        </div>
+                                        <!-- All-->
+                                        <a href="javascript:void(0);" class="dropdown-item text-center text-primary">
+                                            View all <i class="fi-arrow-right"></i>
+                                        </a>
+                                    </div>
+                    </li>
+
+                     </ul>
                   </div>
                 </div>
               </div>

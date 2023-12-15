@@ -1,9 +1,14 @@
-﻿using Pustok.Contracts;
+﻿using Microsoft.AspNetCore.Http;
+using Pustok.Contracts;
 using Pustok.Database;
 using Pustok.Database.DomainModels;
 using Pustok.Services.Abstract;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Pustok.Services.Concretes
 {
@@ -11,6 +16,7 @@ namespace Pustok.Services.Concretes
     {
         private readonly PustokDbContext pustokDbContext;
         private readonly IUserService userService;
+        private readonly IHubContext httpContext;
 
         public OrderService(PustokDbContext pustokDbContext, IUserService userService)
         {
@@ -65,6 +71,29 @@ namespace Pustok.Services.Concretes
 
         }
 
+        public List<UserNotifications> UpdateOrderStatusNotifications(Order order, OrderStatus status)
+        {
+            List<UserNotifications> notifications = new List<UserNotifications>();
+
+                var notification = new UserNotifications
+                {
+                    Title = NotificationTemplate.OrderStatusUpdated.TITLE.
+                            Replace(NotificationTemplateKeyword.USER_FULL_NAME, userService.GetFullName(order.User)).
+                            Replace(NotificationTemplateKeyword.TRACKING_CODE, order.TrackingCode),
+                    Content = NotificationTemplate.OrderStatusUpdated.CONTENT.
+                              Replace(NotificationTemplateKeyword.ORDER_STATUS, status.ToString()),
+                    User = order.User,
+                    CreatedDate = DateTime.UtcNow,
+                };
+
+                notifications.Add(notification);
+
+                pustokDbContext.UserNotifications.Add(notification);
+   
+
+            return notifications;
+
+        }
 
     }
 }

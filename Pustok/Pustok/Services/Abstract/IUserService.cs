@@ -12,5 +12,9 @@ namespace Pustok.Services.Abstract
         string GetCurrentUserFullName();
         bool IsUserSeeded(User user);
         List<User> GetWholeStaff();
+        List<User> GetWholeClients();
+        List<string> GetUserConnection(int userId);
+        void AddCurrentUserConnection(string userConnnection);
+        void RemoveCurrentUserConnection();
     }
 }
