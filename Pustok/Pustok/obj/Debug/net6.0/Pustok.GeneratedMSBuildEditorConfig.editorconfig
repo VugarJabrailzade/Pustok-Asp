@@ -18,6 +18,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes = true
 build_property.MSBuildProjectDirectory = C:\Users\vcebr\Pustok\Pustok\Pustok
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/vcebr/Pustok/Pustok/Pustok/Views/Admin/Broadcast/Send.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQnJvYWRjYXN0XFNlbmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/vcebr/Pustok/Pustok/Pustok/Views/Admin/Category/Add.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ2F0ZWdvcnlcQWRkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

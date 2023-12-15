@@ -122,7 +122,7 @@ namespace Pustok.Services.Concretes
         }
         public List<User> GetWholeClients()
         {
-            var clients = pustokDbContext.Users.Where(user => !user.UserRole.Any(userRole => userRole.Role != null)).ToList();
+            var clients = pustokDbContext.Users.Where(user => !user.UserRole.Any()).ToList();
 
             return clients;
         }

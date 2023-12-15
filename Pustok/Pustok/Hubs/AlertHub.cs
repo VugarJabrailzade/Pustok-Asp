@@ -28,9 +28,5 @@ public class AlertHub : Hub
         return base.OnDisconnectedAsync(exception);
     }
 
-    //public async Task SendMessage(string user, string message)
-    //{
-    //    await Clients.All.SendAsync("ReceiveAllMessage", user, message);
-
-    //}
+    
 }

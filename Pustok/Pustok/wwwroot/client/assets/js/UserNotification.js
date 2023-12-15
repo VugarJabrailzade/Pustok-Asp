@@ -16,7 +16,21 @@ connection.on("UpdatedStatus", (user) => {
     simpleBar.getContentElement();
 
 
-});  
+}); 
+
+connection.on("ReceiveMessage", (message) => {
+
+    let menuItem = BroadcastNotification(message);
+
+    console.log(menuItem);
+    $(".alert-user-menu").prepend(menuItem)
+
+    const simpleBar = new SimpleBar(document.querySelectorAll('.alert-user-menu'));
+    simpleBar.getContentElement();
+    console.log(`Received message: ${message}`);
+});
+
+
 
 async function start() {
     try {
@@ -54,3 +68,19 @@ function AlertUserMenu(data) {
 
     return dropdownmenuitemUser;
 }
+
+function BroadcastNotification(data) {
+    let broadcastMessage = `<a href="#" class="dropdown-item py-xl">
+        <div class="media">
+            <div class="avatar-md bg-soft-primary">
+                <i class="ti ti-chart-arcs"></i>
+            </div>
+            <div class="media-body align-self-center ms-2 text-truncate">
+                <small class="text-muted mb-0">${data.content}</small>
+            </div><!--end media-body-->
+        </div><!--end media-->
+    </a>`
+
+    return broadcastMessage;
+}
+
