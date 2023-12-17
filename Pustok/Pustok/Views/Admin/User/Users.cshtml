@@ -1,6 +1,6 @@
 ﻿@using Pustok.Services.Abstract
 @model List<User>
-@inject IUserService userService
+@inject IUserService _userService
 @{
     Layout = "_AdminLayout";
 }
@@ -22,7 +22,7 @@
         </div><!--end card-header-->
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped mb-0">
+                <table users class="table table-striped mb-0">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -34,10 +34,23 @@
                     <tbody>
                         @foreach (var user in Model)
                         {
-                            <tr>
+                            <tr data-id="@user.Id">
                                 <td>@user.Name</td>
                                 <td>@user.LastName</td>
                                 <td>@user.Email</td>
+                                <td class="user-status">
+
+                                    @if(_userService.IsOnline(user.Id))
+                                    {
+                                        <span class="badge badge-soft-success">Online</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-soft-danger">Offline</span>
+
+                                    }
+
+                                </td>
                                 <td>
                                     @if (user.UserRole.Any())
                                     {
@@ -48,7 +61,7 @@
                                     }
                                 </td>
                                 <td class="text-end">
-                                    @if (!userService.IsUserSeeded(user))
+                                    @if (!_userService.IsUserSeeded(user))
                                     {
                                         <a asp-controller="User" asp-action="Edit" asp-route-id="@user.Id">
                                             <i class="las la-pen text-secondary font-16"></i>
@@ -66,3 +79,8 @@
         </div><!--end card-body-->
     </div><!--end card-->
 </div> <!-- end col -->
+ 
+@section custom_scripts{
+
+    <script src="~/admin/assets/js/UserPageHub.js" asp-append-version="true"></script>
+}

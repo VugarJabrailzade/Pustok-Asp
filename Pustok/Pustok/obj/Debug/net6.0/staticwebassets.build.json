@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "7K/xUFZMVyWbV0B/mIv6A4+p7UPQWJ7uOtvuM1Yux4U=",
+  "Hash": "ZEq6H+TXjUgfU0+N0gbR9DI63JNxHy3BUTOrkQTp4NI=",
   "Source": "Pustok",
   "BasePath": "_content/Pustok",
   "Mode": "Default",
@@ -3644,6 +3644,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\admin\\assets\\js\\Notification.js"
+    },
+    {
+      "Identity": "C:\\Users\\vcebr\\Pustok\\Pustok\\Pustok\\wwwroot\\admin\\assets\\js\\UserPageHub.js",
+      "SourceId": "Pustok",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\vcebr\\Pustok\\Pustok\\Pustok\\wwwroot\\",
+      "BasePath": "_content/Pustok",
+      "RelativePath": "admin/assets/js/UserPageHub.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\admin\\assets\\js\\UserPageHub.js"
     },
     {
       "Identity": "C:\\Users\\vcebr\\Pustok\\Pustok\\Pustok\\wwwroot\\admin\\assets\\pages\\analytics-customers.init.js",

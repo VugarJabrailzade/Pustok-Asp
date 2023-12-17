@@ -761,6 +761,10 @@
       "PackagePath": "staticwebassets\\admin\\assets\\js\\Notification.js"
     },
     {
+      "Id": "C:\\Users\\vcebr\\Pustok\\Pustok\\Pustok\\wwwroot\\admin\\assets\\js\\UserPageHub.js",
+      "PackagePath": "staticwebassets\\admin\\assets\\js\\UserPageHub.js"
+    },
+    {
       "Id": "C:\\Users\\vcebr\\Pustok\\Pustok\\Pustok\\wwwroot\\admin\\assets\\js\\app.js",
       "PackagePath": "staticwebassets\\admin\\assets\\js\\app.js"
     },

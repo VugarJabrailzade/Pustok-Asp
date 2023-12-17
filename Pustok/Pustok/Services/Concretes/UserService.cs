@@ -54,24 +54,46 @@ namespace Pustok.Services.Concretes
 
         public List<string> GetUserConnection(int userId)
         {
-            return userConnection.SingleOrDefault(uc => uc.UserId == userId)?.ConnectionId ?? new List<string>();
+            return userConnection.SingleOrDefault(uc => uc.UserId == userId)?.ConnectionIds ?? new List<string>();
         }
 
-        public void AddCurrentUserConnection(string userConnnection)
+        public void AddCurrentUserConnection(string connectionId)
         {
-            userConnection.Add(new UserConnectionViewModel
+
+            var connectionIds = userConnection.SingleOrDefault(uc => uc.UserId == CurrentUser.Id)?.ConnectionIds;
+
+            if(connectionIds == null)
             {
-                UserId = CurrentUser.Id,
-                ConnectionId = new List<string> { userConnnection }
-            });
+                userConnection.Add(new UserConnectionViewModel
+                {
+                    UserId = CurrentUser.Id,
+                    ConnectionIds = new List<string> { connectionId }
+                });
+
+            }
+            else
+            {
+                connectionIds.Add(connectionId);
+            }
         }
 
-        public void RemoveCurrentUserConnection()
+
+        public void RemoveCurrentUserConnection(string connectionId)
         {
-            userConnection.RemoveAll(uc => uc.UserId == CurrentUser.Id);
+            var connectionIds = userConnection.SingleOrDefault(uc => uc.UserId == CurrentUser.Id)?.ConnectionIds;
+
+
+            if (connectionIds != null)
+            {
+                connectionIds.Remove(connectionId);
+            }
+
         }
 
-
+        public bool IsOnline(int userId)
+        {
+            return userConnection.Any(uc => uc.UserId == userId && uc.ConnectionIds.Any());
+        }
 
         private User GetCurrentLoggedUser()
         {

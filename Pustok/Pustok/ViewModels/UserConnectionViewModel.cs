@@ -5,6 +5,6 @@ namespace Pustok.ViewModels;
 public class UserConnectionViewModel
 {
     public int UserId { get; set; }
-    public List<string> ConnectionId {  get; set; }
+    public List<string> ConnectionIds {  get; set; }
 
 }

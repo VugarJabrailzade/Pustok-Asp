@@ -65,6 +65,7 @@ public class Program
         app.MapControllerRoute("default", "{controller=Home}/{action=Index}");
 
         app.MapHub<AlertHub>("alerthub");
+        app.MapHub<UsersPageHub>("userspagehub");
 
     }
 

@@ -11,10 +11,11 @@ namespace Pustok.Services.Abstract
         string GetFullName(User user);
         string GetCurrentUserFullName();
         bool IsUserSeeded(User user);
+        bool IsOnline(int userId);
         List<User> GetWholeStaff();
         List<User> GetWholeClients();
         List<string> GetUserConnection(int userId);
         void AddCurrentUserConnection(string userConnnection);
-        void RemoveCurrentUserConnection();
+        void RemoveCurrentUserConnection(string connectionId);
     }
 }
