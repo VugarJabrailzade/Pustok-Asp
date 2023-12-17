@@ -4,7 +4,9 @@ using Pustok.Database;
 using Pustok.Database.DomainModels;
 using Pustok.Services.Abstract;
 using Pustok.ViewModels.Basket;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 
 namespace Pustok.Controllers.Client;
 
@@ -31,13 +33,51 @@ public class BasketController : Controller
     [HttpGet("add-product")]
     public IActionResult AddProduct(int productId, int? sizeId, int? colorId)
     {
+        List<BasketCookieViewModel> model = null;
+        var basketCookieValue = HttpContext.Request.Cookies["Basket"];
 
-        basketService.AddOrIncrementQuantity(productId,
+        if(basketCookieValue != null )
+        {
+           model = JsonSerializer.Deserialize<List<BasketCookieViewModel>>(basketCookieValue);
+
+           var productCookieViewModel = model.FirstOrDefault(x=> x.ProductId == productId);
+
+            if (productCookieViewModel != null)
+            {
+                productCookieViewModel.Quantity++;
+            }
+            else
+            {
+                model.Add(
+                         new BasketCookieViewModel(
+                         productId,
+                         sizeId ?? productService.GetDefaultSizeId(productId),
+                         colorId ?? productService.GetDefaultColorId(productId)));
+
+            }
+
+        }
+        else
+        {
+
+            model = new List<BasketCookieViewModel>()
+            {
+                new BasketCookieViewModel(
+                    productId,
                     sizeId ?? productService.GetDefaultSizeId(productId),
-                    colorId ?? productService.GetDefaultColorId(productId),
-                    userService.CurrentUser);
+                    colorId ?? productService.GetDefaultColorId(productId))
+            };
 
-        pustokDbContext.SaveChanges();
+            HttpContext.Response.Cookies.Append("Basket", JsonSerializer.Serialize(model));
+        }
+
+
+        //basketService.AddOrIncrementQuantity(productId,
+        //            sizeId ?? productService.GetDefaultSizeId(productId),
+        //            colorId ?? productService.GetDefaultColorId(productId),
+        //            userService.CurrentUser);
+
+        //pustokDbContext.SaveChanges();
 
         return RedirectToAction("index", "home");
     }

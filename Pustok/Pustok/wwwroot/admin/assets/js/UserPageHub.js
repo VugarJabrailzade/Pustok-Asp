@@ -9,7 +9,7 @@ usersPageConnection.on("ReceiveUserStatus", (data) => {
     $(`[users]`)
         .find(`[data-id='${data.userId}']`)
         .find(`[user-status]`)
-        .html(GetUserStatus(data))
+        .html(GetUserStatus(data.isOnline))
 });
 
 

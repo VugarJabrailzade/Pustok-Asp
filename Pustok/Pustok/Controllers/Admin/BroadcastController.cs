@@ -45,7 +45,7 @@ namespace Pustok.Controllers.Admin
         }
 
         [HttpPost("send")]
-        public async Task<IActionResult> SendMessage(BroadcastViewModel model)
+        public async Task<IActionResult> SendNotification(BroadcastViewModel model)
         {
             var users = userService.GetWholeClients();
             List<Notifications> notifications = new List<Notifications>();
