@@ -1,4 +1,5 @@
 ﻿using Pustok.Database.Abstracts;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Pustok.Database.DomainModels;
@@ -13,4 +14,5 @@ public class Category : IEntity
 
     [Column("name")]
     public string Name { get; set; }
+    public List<Product> Products { get; set; }
 }

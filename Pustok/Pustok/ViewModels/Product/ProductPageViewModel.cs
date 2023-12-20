@@ -1,6 +1,42 @@
-﻿namespace Pustok.ViewModels.Product;
+﻿using System.Collections.Generic;
+
+namespace Pustok.ViewModels.Product;
 
 public class ProductPageViewModel
 {
+    public List<ProductViewModel> Products { get; set; }
+    public List<CategoryViewModel> Categories { get; set; }
+    public List<ColorViewModel> Colors { get; set; }
 
+    public decimal? PriceMinRange { get; set; }
+    public decimal? PriceMaxRange { get; set; }
+    public string Search {  get; set; }
+    public int? CategoryId { get; set; }
+    public int? ColorId { get; set; }
+    public decimal? PriceMinPrice { get; set; }
+    public decimal? PriceMaxPrice { get; set; }
+
+}
+
+public class ProductViewModel
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public decimal  Price { get; set; }
+    public int Rating { get; set; }
+    public string Imageurl { get; set; }
+}
+
+public class CategoryViewModel
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public int ProductsCount { get; set; }
+}
+
+public class ColorViewModel
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public int ProductsCount { get; set; }
 }

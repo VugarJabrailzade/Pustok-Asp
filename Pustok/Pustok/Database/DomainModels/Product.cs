@@ -16,7 +16,7 @@ public class Product : IEntity
 
     public Product(string name, decimal price, int rating)
     {
-        Name = name;
+            Name = name;
         Price = price;
         Rating = rating;
     }

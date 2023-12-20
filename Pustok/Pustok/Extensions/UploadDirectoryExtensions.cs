@@ -12,7 +12,7 @@ namespace Pustok.Extensions
             switch (uploadDirectory)
             {
                 case UploadDirectory.Products:
-                    return @"C:\Users\vcebr\OneDrive\Desktop\Pustok\Pustok\Pustok\wwwroot\images\product";
+                    return @"C:\Users\vcebr\Pustok\Pustok\Pustok\wwwroot\images\product\";
                 default:
                     throw new UploadDirectoryException("Upload Path Not Found!", uploadDirectory);
             }
