@@ -13,8 +13,9 @@ public class ProductPageViewModel
     public string Search {  get; set; }
     public int? CategoryId { get; set; }
     public int? ColorId { get; set; }
-    public decimal? PriceMinPrice { get; set; }
-    public decimal? PriceMaxPrice { get; set; }
+    public decimal? PriceMinRangeFilter { get; set; }
+    public decimal? PriceMaxRangeFilter { get; set; }
+    public string? Sort { get; set; }
 
 }
 
