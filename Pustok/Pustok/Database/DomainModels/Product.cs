@@ -36,7 +36,10 @@ public class Product : IEntity
     [Column("categoryid")]
     public int? CategoryId { get; set; }
 
-    public string ImagePath { get; set; } 
+    [Column("ImagePath")]
+    public string ImagePath { get; set; }
+
+    [Column("ImageNameInFileSystem")]
     public string ImageNameInFileSystem { get; set; }
     public Category Category { get; set; }
 

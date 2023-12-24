@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Pustok.Contracts;
 using Pustok.Database;
 using Pustok.Database.DomainModels;
 using Pustok.Extensions;
+using Pustok.Helpers.Paging;
 using Pustok.Services.Abstract;
 using Pustok.ViewModels.Product;
 using System;
@@ -18,11 +20,13 @@ public class ProductController : Controller
 {
     private readonly PustokDbContext _pustokDbContext;
     private readonly IFileService _fileService;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public ProductController(PustokDbContext pustokDbContext, IFileService fileService)
+    public ProductController(PustokDbContext pustokDbContext, IFileService fileService, IHttpContextAccessor httpContextAccessor)
     {
         _pustokDbContext = pustokDbContext;
         _fileService = fileService;
+        _httpContextAccessor = httpContextAccessor;
     }
 
 
@@ -32,7 +36,8 @@ public class ProductController : Controller
         [FromQuery] int? categoryId,
         [FromQuery] int? colorId,
         [FromQuery(Name ="price-range-filter")] string priceRangeFilter,
-        [FromQuery] string sort
+        [FromQuery] string sort,
+        [FromQuery] int? page    
         )
     
     {
@@ -47,20 +52,21 @@ public class ProductController : Controller
         productPageViewModel.PriceMaxRange = GetPriceMaxRange();
         productPageViewModel.Sort = sort;
 
+        (var products, var paginator) = await GetProductsAsync();
+
         productPageViewModel.PriceMaxRangeFilter = priceMaxRangeFilter;
         productPageViewModel.PriceMinRangeFilter = priceMinRangeFilter;
-
-        productPageViewModel.Products = await GetProductsAsync();
-
-
-         productPageViewModel.Categories = await GetCategoryAsync();
-         productPageViewModel.Colors = await GetColorAsync();
+        productPageViewModel.Page = page ?? 1;
+        productPageViewModel.Products = products;
+        productPageViewModel.Paginator = paginator;
+        productPageViewModel.Categories = await GetCategoryAsync();
+        productPageViewModel.Colors = await GetColorAsync();
 
         productPageViewModel.PriceMinRange = _pustokDbContext.Products.OrderBy(p => p.Price).FirstOrDefault()?.Price;
         productPageViewModel.PriceMaxRange = _pustokDbContext.Products.OrderByDescending(p => p.Price).FirstOrDefault()?.Price;
 
   
-        async Task<List<ProductViewModel>> GetProductsAsync()
+        async Task<(List<ProductViewModel> products, Paginator<Product> paginator)> GetProductsAsync()
         {
             var productQuery = _pustokDbContext.Products.
                     WhereNotNull(search, p => EF.Functions.ILike(p.Name, $"%{search}%")).
@@ -71,16 +77,20 @@ public class ProductController : Controller
 
             productQuery = ImplementProductSorting(productQuery, sort);
 
-            return  await productQuery.
-                    Select(p => new ProductViewModel
-            {
-                Id = p.Id,
-                Name = p.Name,
-                Price = p.Price,
-                Rating = p.Rating,
-                Imageurl = UploadDirectory.Products.GetUrl(p.ImageNameInFileSystem),
+            paginator = new Paginator<Product>(productQuery, page, 9);
 
-            }).ToListAsync();
+           var products = await paginator.QuerySet.
+                    Select(p => new ProductViewModel
+                    {
+                        Id = p.Id,
+                        Name = p.Name,
+                        Price = p.Price,
+                        Rating = p.Rating,
+                        Imageurl = UploadDirectory.Products.GetUrl(p.ImageNameInFileSystem),
+
+                    }).ToListAsync();
+
+            return (products, paginator);
 
 
         }
@@ -148,6 +158,16 @@ public class ProductController : Controller
                 default:
                     throw new Exception("Sort query doesn't found");
             }
+        }
+
+        IQueryable<Product> ImplementPaging(IQueryable<Product> productQuery, int? page = 1)
+        {
+            const int pageSize = 6;
+
+            int skipCount = ((page ?? 1)-1) * pageSize;
+
+           return productQuery.Skip(skipCount).Take(pageSize);
+
         }
 
 

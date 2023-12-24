@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Pustok.Helpers.Paging;
+using System.Collections.Generic;
 
 namespace Pustok.ViewModels.Product;
 
@@ -8,6 +9,8 @@ public class ProductPageViewModel
     public List<CategoryViewModel> Categories { get; set; }
     public List<ColorViewModel> Colors { get; set; }
 
+    public Paginator<Database.DomainModels.Product> Paginator { get; set; }
+
     public decimal? PriceMinRange { get; set; }
     public decimal? PriceMaxRange { get; set; }
     public string Search {  get; set; }
@@ -16,6 +19,7 @@ public class ProductPageViewModel
     public decimal? PriceMinRangeFilter { get; set; }
     public decimal? PriceMaxRangeFilter { get; set; }
     public string? Sort { get; set; }
+    public  int? Page {  get; set; }
 
 }
 
