@@ -225,6 +225,12 @@
                     </div>
                     <div class="pagination-area">
                         <nav aria-label="Page navigation example">
+                            <select asp-for=PageSize form="products-filter" onchange="this.form.submit()">
+                                <option selected">9</option>
+                                <option>12</option>
+                                <option>15</option>
+                                <option>18</option>
+                            </select>
                             <ul class="pagination justify-content-center">
                                 <li class="page-item">
                                     <button name="page" type="submit" value="1" class="page-link" form="products-filter" aria-label="Next">First </button>

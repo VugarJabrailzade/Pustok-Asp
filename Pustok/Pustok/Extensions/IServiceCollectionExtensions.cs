@@ -25,7 +25,7 @@ public static class IServiceCollectionExtensions
     }
 
     
-    public static void AddCustomService(this IServiceCollection serviceCollection)
+    public static void AddCustomService(this IServiceCollection serviceCollection, IConfiguration configuration)
     {
 
         serviceCollection
@@ -40,7 +40,8 @@ public static class IServiceCollectionExtensions
             .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CategoryAddResponseViewModel>())
             .AddDbContext<PustokDbContext>(o =>
             {
-                o.UseNpgsql(DatabaseConstants.CONNECTION_STRING);
+                var connectionString = configuration.GetConnectionString("Pustok");
+                o.UseNpgsql(connectionString);
             });
 
     }

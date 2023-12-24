@@ -47,7 +47,7 @@ public class Program
 
         builder.Services.AddAuth();
 
-        builder.Services.AddCustomService();    
+        builder.Services.AddCustomService(builder.Configuration);    
 
         builder.Services.AddEmailConfiguration(builder.Configuration);
         builder.Services.AddSignalR();

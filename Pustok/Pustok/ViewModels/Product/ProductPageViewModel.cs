@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Pustok.ViewModels.Product;
 
-public class ProductPageViewModel
+public class ProductPageViewModel : QueryParams
 {
     public List<ProductViewModel> Products { get; set; }
     public List<CategoryViewModel> Categories { get; set; }
@@ -13,13 +13,11 @@ public class ProductPageViewModel
 
     public decimal? PriceMinRange { get; set; }
     public decimal? PriceMaxRange { get; set; }
-    public string Search {  get; set; }
     public int? CategoryId { get; set; }
     public int? ColorId { get; set; }
     public decimal? PriceMinRangeFilter { get; set; }
     public decimal? PriceMaxRangeFilter { get; set; }
-    public string? Sort { get; set; }
-    public  int? Page {  get; set; }
+    
 
 }
 

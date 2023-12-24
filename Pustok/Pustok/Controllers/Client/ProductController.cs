@@ -37,7 +37,8 @@ public class ProductController : Controller
         [FromQuery] int? colorId,
         [FromQuery(Name ="price-range-filter")] string priceRangeFilter,
         [FromQuery] string sort,
-        [FromQuery] int? page    
+        [FromQuery] int? page,
+        [FromQuery] int? pageSize
         )
     
     {
@@ -45,22 +46,24 @@ public class ProductController : Controller
         (decimal? priceMinRangeFilter, decimal? priceMaxRangeFilter) = GetRanges(priceRangeFilter);
 
         var productPageViewModel = new ProductPageViewModel();
-        productPageViewModel.Search = search;
         productPageViewModel.CategoryId = categoryId;
         productPageViewModel.ColorId = colorId;
         productPageViewModel.PriceMinRange = GetPriceMinRange();
         productPageViewModel.PriceMaxRange = GetPriceMaxRange();
-        productPageViewModel.Sort = sort;
-
+        productPageViewModel.Categories = await GetCategoryAsync();
+        productPageViewModel.Colors = await GetColorAsync();
         (var products, var paginator) = await GetProductsAsync();
 
         productPageViewModel.PriceMaxRangeFilter = priceMaxRangeFilter;
         productPageViewModel.PriceMinRangeFilter = priceMinRangeFilter;
-        productPageViewModel.Page = page ?? 1;
         productPageViewModel.Products = products;
         productPageViewModel.Paginator = paginator;
-        productPageViewModel.Categories = await GetCategoryAsync();
-        productPageViewModel.Colors = await GetColorAsync();
+        
+
+        productPageViewModel.Page = page ?? 1;
+        productPageViewModel.PageSize = pageSize;
+        productPageViewModel.Search = search;
+        productPageViewModel.Sort = sort;
 
         productPageViewModel.PriceMinRange = _pustokDbContext.Products.OrderBy(p => p.Price).FirstOrDefault()?.Price;
         productPageViewModel.PriceMaxRange = _pustokDbContext.Products.OrderByDescending(p => p.Price).FirstOrDefault()?.Price;
@@ -77,7 +80,7 @@ public class ProductController : Controller
 
             productQuery = ImplementProductSorting(productQuery, sort);
 
-            paginator = new Paginator<Product>(productQuery, page, 9);
+            paginator = new Paginator<Product>(productQuery, page, pageSize ?? 9);
 
            var products = await paginator.QuerySet.
                     Select(p => new ProductViewModel
